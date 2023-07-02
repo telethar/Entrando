@@ -16,7 +16,8 @@ func _ready() -> void:
 	Events.connect("marker_clicked", self, "generate_marker")
 	Events.connect("save_file_clicked", self, "open_save_dialog")
 	Events.connect("load_file_clicked", self, "open_load_dialog")
-
+	Events.emit_signal("start_autotracking")
+	
 	load_data("res://assets/map/750.json")
 
 func _notification(what: int) -> void:
