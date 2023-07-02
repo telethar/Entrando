@@ -8,7 +8,9 @@ enum {
 	# 4 separator
 	MENU_REMAINING_ENTRANCES = 5,
 	MENU_DRAG_N_DROP = 6,
-	MENU_OW_ITEMS = 7
+	MENU_OW_ITEMS = 7,
+	# 8 separator
+	MENU_START_AUTOTRACKING = 9,
 }
 
 onready var menu = $PopupMenu
@@ -32,6 +34,8 @@ func _ready() -> void:
 	menu.add_check_item("Show Remaining Entrances", MENU_REMAINING_ENTRANCES)
 	menu.add_check_item("Drag n' Drop Markers", MENU_DRAG_N_DROP)
 	menu.add_item("Hide OW Item Markers", MENU_OW_ITEMS)
+	menu.add_separator()
+	menu.add_item("(Re)connect Auto-Tracking", MENU_START_AUTOTRACKING)
 
 	tooltip_timer.connect("timeout", self, "_on_tooltip_timeout")
 
@@ -79,6 +83,8 @@ func menu_pressed(id: int) -> void:
 		MENU_RESET:
 			get_tree().reload_current_scene()
 			Events.emit_signal("tracker_restarted")
+		MENU_START_AUTOTRACKING:
+			Events.emit_signal("start_autotracking")
 
 func _on_notes_entered(node: Node) -> void:
 	if tooltip.visible:
