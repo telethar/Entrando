@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Map/LightWorld.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/GUI/GUI.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@ script = ExtResource( 3 )
 
 [node name="AutoTracker" type="Node" parent="."]
 script = ExtResource( 6 )
-
 
 [node name="LightWorld" parent="." instance=ExtResource( 1 )]
 
