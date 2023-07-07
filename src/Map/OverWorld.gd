@@ -6,7 +6,7 @@ func save_data() -> Array:
         if !child.visible:
             continue
         children.append({
-            "loc_name": child.loc_name,
+            "loc_name": child.name,
             "is_item": child.is_item,
             "x": child.position.x,
             "y": child.position.y
