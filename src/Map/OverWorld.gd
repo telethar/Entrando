@@ -6,6 +6,7 @@ func save_data() -> Array:
         if !child.visible:
             continue
         children.append({
+            "loc_name": child.name,
             "is_item": child.is_item,
             "x": child.position.x,
             "y": child.position.y
@@ -19,5 +20,7 @@ func load_data(children: Array) -> void:
     for data in children:
         var node = icon_scene.instance()
         node.is_item = data.is_item
+        node.set_name(data.loc_name)
         add_child(node)
+        node.set_owner(self)
         node.position = Vector2(data.x, data.y)

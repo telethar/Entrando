@@ -29,7 +29,7 @@ var locations_to_sram = {
     "Library": [[0x410, 0x80]],
     "SickKid": [[0x410, 0x04]],
     "Aginah": [[0x214, 0x10]],
-    "Dam": [[0x216, 0x10]],
+    "FloodgateChest": [[0x216, 0x10]],
     "IceRodCave": [[0x240, 0x10]],
     "HammerPegs": [[0x24F, 0x04]],
     "MiniMoldorm": [[0x246, 0xF0], [0x247, 0x04]],
@@ -41,7 +41,6 @@ var locations_to_sram = {
     "Brewery": [[0x20C, 0x10]],
     "Checkerboard": [[0x24D, 0x02]],
     "Blind": [[0x23A, 0xF0], [0x23B, 0x01]],
-    "Pyramid": [[0x22C, 0x30]],
     "Spike": [[0x22E, 0x10]],
     "Cave45": [[0x237, 0x04]],
     "GraveyardLedge": [[0x237, 0x02]],
@@ -51,8 +50,51 @@ var locations_to_sram = {
     "PotionShop": [[0x411, 0x20]],
     "Smith": [[0x411, 0x04]],
     "Powder": [[0x411, 0x80]],
+    "Bombos Tablet": [[0x411, 0x02]],
+    "Bottle Merchant": [[0x3C9, 0x02]],
+    "Desert Ledge": [[0x2B0, 0x40]],
+    "Ether Tablet": [[0x411, 0x01]],
+    "Floating Island": [[0x285, 0x40]],
+    "Flute Spot": [[0x2AA, 0x40]],
+    "Hobo": [[0x3C9, 0x01]],
+    "King Zora": [[0x410, 0x02]],
+    "Lake Hylia Island": [[0x2B5, 0x40]],
+    "Master Sword Pedestal": [[0x300, 0x40]],
+    "Maze Race": [[0x2A8, 0x40]],
+    "Mushroom": [[0x411, 0x10]],
+    "Old Man": [[0x410, 0x01]],
+    "Purple Chest": [[0x3C9, 0x10]],
+    "Spectacle Rock": [[0x283, 0x40]],
+    "Sunken Treasure": [[0x2BB, 0x40]],
+    "Zora's Ledge": [[0x301, 0x40]],
+    "Bumper Cave Ledge": [[0x2CA, 0x40]],
+    "Catfish": [[0x410, 0x20]],
+    "Digging Game": [[0x2E8, 0x40]],
+    "Pyramid": [[0x22C, 0x30]],
+    "Stumpy": [[0x410, 0x08]],
 }
-
+var ow_item_locs = ["Bombos Tablet",
+    "Bottle Merchant",
+    "Desert Ledge",
+    "Ether Tablet",
+    "Floating Island",
+    "Flute Spot",
+    "Hobo",
+    "King Zora",
+    "Lake Hylia Island",
+    "Master Sword Pedestal",
+    "Maze Race",
+    "Mushroom",
+    "Old Man",
+    "Purple Chest",
+    "Spectacle Rock",
+    "Sunken Treasure",
+    "Zora's Ledge",
+    "Bumper Cave Ledge",
+    "Catfish",
+    "Digging Game",
+    "Pyramid",
+    "Stumpy"]
 
 enum AUTOTRACKER_STATUS {
     DISCONNECTED,
@@ -153,8 +195,13 @@ func process_location_data():
                 all_locs_checked = all_locs_checked && (new_value == mask)
             if was_any_change and (all_locs_checked or any_locs_checked):
                 var item_node = get_parent().find_node(loc).get_child(0)
-                item_node.set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
-                item_node.set_pressed(true)
+                if loc in ow_item_locs:
+                    item_node.hide()
+                    # Do this to allow ctrl-z to undo
+                    Util.add_hidden(item_node)
+                else:
+                    item_node.set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
+                    item_node.set_pressed(true)
 
     _old_location_data = _location_data
     _location_data = null
