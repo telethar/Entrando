@@ -1,6 +1,932 @@
 {
-  "light_world": [{"is_item":true,"x":92,"y":64},{"is_item":false,"x":142,"y":98},{"is_item":false,"x":139,"y":10},{"is_item":false,"x":226,"y":56},{"is_item":false,"x":252,"y":46},{"is_item":false,"x":267,"y":133},{"is_item":false,"x":270,"y":115},{"is_item":false,"x":141,"y":242},{"is_item":false,"x":97,"y":315},{"is_item":false,"x":114,"y":316},{"is_item":false,"x":128,"y":316},{"is_item":false,"x":18,"y":319},{"is_item":false,"x":38,"y":350},{"is_item":true,"x":72,"y":349},{"is_item":false,"x":156,"y":362},{"is_item":false,"x":117,"y":403},{"is_item":true,"x":120,"y":424},{"is_item":false,"x":120,"y":447},{"is_item":false,"x":82,"y":438},{"is_item":false,"x":73,"y":405},{"is_item":false,"x":21,"y":446},{"is_item":false,"x":153,"y":400},{"is_item":false,"x":243,"y":420},{"is_item":false,"x":229,"y":401},{"is_item":true,"x":22.9464,"y":524.281006},{"is_item":false,"x":81.812103,"y":540.038025},{"is_item":false,"x":105.596001,"y":540.038025},{"is_item":false,"x":117.191002,"y":495.442993},{"is_item":false,"x":161.192001,"y":528.442993},{"is_item":false,"x":293,"y":220},{"is_item":false,"x":390,"y":220},{"is_item":false,"x":428,"y":206},{"is_item":false,"x":451,"y":222},{"is_item":false,"x":482,"y":233},{"is_item":false,"x":601,"y":252},{"is_item":false,"x":675.58197,"y":107.126999},{"is_item":true,"x":730.737,"y":100.056},{"is_item":true,"x":717.008972,"y":100.056},{"is_item":false,"x":337,"y":292},{"is_item":false,"x":375,"y":301},{"is_item":false,"x":413,"y":292},{"is_item":false,"x":375,"y":331},{"is_item":false,"x":446.480011,"y":311.480988},{"is_item":false,"x":608,"y":340},{"is_item":false,"x":719,"y":292},{"is_item":false,"x":618,"y":484},{"is_item":false,"x":735,"y":526},{"is_item":true,"x":216,"y":497},{"is_item":false,"x":411,"y":518},{"is_item":false,"x":26,"y":596},{"is_item":false,"x":56,"y":597},{"is_item":false,"x":56,"y":575},{"is_item":false,"x":85,"y":597},{"is_item":false,"x":132,"y":583},{"is_item":true,"x":18,"y":686},{"is_item":false,"x":149,"y":620},{"is_item":false,"x":208,"y":669},{"is_item":false,"x":234,"y":718},{"is_item":true,"x":338,"y":698},{"is_item":false,"x":352,"y":702},{"is_item":false,"x":448,"y":584},{"is_item":false,"x":490,"y":705},{"is_item":false,"x":594,"y":640},{"is_item":true,"x":547,"y":621},{"is_item":true,"x":531,"y":523},{"is_item":false,"x":486,"y":603},{"is_item":false,"x":545,"y":575},{"is_item":false,"x":671,"y":578},{"is_item":false,"x":679,"y":592},{"is_item":false,"x":686,"y":578},{"is_item":true,"x":165,"y":690},{"is_item":false,"x":355,"y":490},{"is_item":false,"x":199,"y":620},{"is_item":false,"x":305,"y":142},{"is_item":false,"x":337,"y":176},{"is_item":false,"x":342,"y":104},{"is_item":false,"x":367,"y":110},{"is_item":false,"x":296,"y":103},{"is_item":false,"x":402,"y":122},{"is_item":false,"x":366,"y":77},{"is_item":true,"x":380,"y":66},{"is_item":true,"x":315,"y":13},{"is_item":false,"x":420,"y":24},{"is_item":false,"x":601,"y":98},{"is_item":false,"x":616,"y":103},{"is_item":false,"x":631,"y":109},{"is_item":false,"x":645,"y":109},{"is_item":false,"x":647,"y":163},{"is_item":false,"x":616,"y":85},{"is_item":false,"x":598,"y":69},{"is_item":false,"x":632,"y":67},{"is_item":false,"x":645,"y":48},{"is_item":true,"x":609,"y":14}],
-  "dark_world": [{"is_item":false,"x":269.90799,"y":113.449997},{"is_item":false,"x":266.729004,"y":131.990005},{"is_item":false,"x":28.999901,"y":38},{"is_item":false,"x":253,"y":43},{"is_item":false,"x":141,"y":243},{"is_item":false,"x":249,"y":344},{"is_item":false,"x":37.999901,"y":350},{"is_item":false,"x":93.999901,"y":364},{"is_item":false,"x":156,"y":363},{"is_item":false,"x":81.999901,"y":438},{"is_item":false,"x":152,"y":401},{"is_item":false,"x":237,"y":454},{"is_item":true,"x":229,"y":396},{"is_item":false,"x":346,"y":205},{"is_item":true,"x":256,"y":114},{"is_item":false,"x":374,"y":305},{"is_item":false,"x":351,"y":364},{"is_item":true,"x":435,"y":335},{"is_item":false,"x":604,"y":254},{"is_item":true,"x":671,"y":128},{"is_item":false,"x":637,"y":378},{"is_item":false,"x":719,"y":295},{"is_item":false,"x":618,"y":484},{"is_item":false,"x":736,"y":524},{"is_item":true,"x":35.999901,"y":508},{"is_item":false,"x":161,"y":525},{"is_item":true,"x":232,"y":514},{"is_item":false,"x":28.999901,"y":601},{"is_item":false,"x":55.999901,"y":604},{"is_item":false,"x":81.999901,"y":601},{"is_item":false,"x":150,"y":619},{"is_item":false,"x":351,"y":702},{"is_item":false,"x":449,"y":583},{"is_item":false,"x":485,"y":601},{"is_item":false,"x":598,"y":647},{"is_item":false,"x":671,"y":577},{"is_item":false,"x":685,"y":577},{"is_item":false,"x":678,"y":591},{"is_item":false,"x":354,"y":488},{"is_item":false,"x":410,"y":516},{"is_item":false,"x":305,"y":141},{"is_item":false,"x":432,"y":109},{"is_item":false,"x":422,"y":32},{"is_item":false,"x":601,"y":12},{"is_item":false,"x":706,"y":62},{"is_item":false,"x":632,"y":109},{"is_item":false,"x":645,"y":109},{"is_item":false,"x":615,"y":86},{"is_item":false,"x":598,"y":68},{"is_item":false,"x":632,"y":68},{"is_item":false,"x":624,"y":49},{"is_item":false,"x":645,"y":47}],
+  "light_world": [
+    {
+      "loc_name": "Links House",
+      "is_item": false,
+      "x": 409,
+      "y": 517
+    },
+    {
+      "loc_name": "Desert Palace Entrance (South)",
+      "is_item": false,
+      "x": 54,
+      "y": 596
+    },
+    {
+      "loc_name": "Desert Palace Entrance (West)",
+      "is_item": false,
+      "x": 25,
+      "y": 596
+    },
+    {
+      "loc_name": "Desert Palace Entrance (North)",
+      "is_item": false,
+      "x": 54,
+      "y": 575
+    },
+    {
+      "loc_name": "Desert Palace Entrance (East)",
+      "is_item": false,
+      "x": 84,
+      "y": 596
+    },
+    {
+      "loc_name": "Eastern Palace",
+      "is_item": false,
+      "x": 719,
+      "y": 292
+    },
+    {
+      "loc_name": "Tower of Hera",
+      "is_item": false,
+      "x": 419,
+      "y": 24
+    },
+    {
+      "loc_name": "Hyrule Castle Entrance (South)",
+      "is_item": false,
+      "x": 374,
+      "y": 328
+    },
+    {
+      "loc_name": "Hyrule Castle Entrance (West)",
+      "is_item": false,
+      "x": 336,
+      "y": 290
+    },
+    {
+      "loc_name": "Hyrule Castle Entrance (East)",
+      "is_item": false,
+      "x": 413,
+      "y": 291
+    },
+    {
+      "loc_name": "Agahnims Tower",
+      "is_item": false,
+      "x": 374,
+      "y": 300
+    },
+    {
+      "loc_name": "Elder House (East)",
+      "is_item": false,
+      "x": 127,
+      "y": 314
+    },
+    {
+      "loc_name": "Elder House (West)",
+      "is_item": false,
+      "x": 113,
+      "y": 314
+    },
+    {
+      "loc_name": "Two Brothers House (East)",
+      "is_item": false,
+      "x": 104,
+      "y": 539
+    },
+    {
+      "loc_name": "Two Brothers House (West)",
+      "is_item": false,
+      "x": 81,
+      "y": 539
+    },
+    {
+      "loc_name": "Old Man Cave (West)",
+      "is_item": false,
+      "x": 265,
+      "y": 131
+    },
+    {
+      "loc_name": "Old Man Cave (East)",
+      "is_item": false,
+      "x": 303,
+      "y": 140
+    },
+    {
+      "loc_name": "Old Man House (Bottom)",
+      "is_item": false,
+      "x": 336,
+      "y": 175
+    },
+    {
+      "loc_name": "Old Man House (Top)",
+      "is_item": false,
+      "x": 400,
+      "y": 120
+    },
+    {
+      "loc_name": "Death Mountain Return Cave (East)",
+      "is_item": false,
+      "x": 295,
+      "y": 102
+    },
+    {
+      "loc_name": "Death Mountain Return Cave (West)",
+      "is_item": false,
+      "x": 268,
+      "y": 114
+    },
+    {
+      "loc_name": "Spectacle Rock Cave Peak",
+      "is_item": false,
+      "x": 365,
+      "y": 76
+    },
+    {
+      "loc_name": "Spectacle Rock Cave",
+      "is_item": false,
+      "x": 365,
+      "y": 108
+    },
+    {
+      "loc_name": "Spectacle Rock Cave (Bottom)",
+      "is_item": false,
+      "x": 342,
+      "y": 102
+    },
+    {
+      "loc_name": "Paradox Cave (Bottom)",
+      "is_item": false,
+      "x": 647,
+      "y": 161
+    },
+    {
+      "loc_name": "Paradox Cave (Middle)",
+      "is_item": false,
+      "x": 645,
+      "y": 109
+    },
+    {
+      "loc_name": "Paradox Cave (Top)",
+      "is_item": false,
+      "x": 643,
+      "y": 47
+    },
+    {
+      "loc_name": "Fairy Ascension Cave (Bottom)",
+      "is_item": false,
+      "x": 614,
+      "y": 102
+    },
+    {
+      "loc_name": "Fairy Ascension Cave (Top)",
+      "is_item": false,
+      "x": 614,
+      "y": 85
+    },
+    {
+      "loc_name": "Spiral Cave",
+      "is_item": false,
+      "x": 596,
+      "y": 67
+    },
+    {
+      "loc_name": "Spiral Cave (Bottom)",
+      "is_item": false,
+      "x": 600,
+      "y": 97
+    },
+    {
+      "loc_name": "Waterfall of Wishing",
+      "is_item": false,
+      "x": 674,
+      "y": 101
+    },
+    {
+      "loc_name": "Dam",
+      "is_item": false,
+      "x": 351,
+      "y": 703
+    },
+    {
+      "loc_name": "Blinds Hideout",
+      "is_item": false,
+      "x": 95,
+      "y": 314
+    },
+    {
+      "loc_name": "Hyrule Castle Secret Entrance Drop",
+      "is_item": false,
+      "x": 446,
+      "y": 312
+    },
+    {
+      "loc_name": "Bonk Fairy (Light)",
+      "is_item": false,
+      "x": 353,
+      "y": 489
+    },
+    {
+      "loc_name": "Lake Hylia Fairy",
+      "is_item": false,
+      "x": 617,
+      "y": 484
+    },
+    {
+      "loc_name": "Light Hype Fairy",
+      "is_item": false,
+      "x": 447,
+      "y": 584
+    },
+    {
+      "loc_name": "Desert Fairy",
+      "is_item": false,
+      "x": 207,
+      "y": 668
+    },
+    {
+      "loc_name": "Kings Grave",
+      "is_item": false,
+      "x": 450,
+      "y": 221
+    },
+    {
+      "loc_name": "Tavern North",
+      "is_item": false,
+      "x": 119,
+      "y": 424
+    },
+    {
+      "loc_name": "Chicken House",
+      "is_item": false,
+      "x": 72,
+      "y": 405
+    },
+    {
+      "loc_name": "Aginahs Cave",
+      "is_item": false,
+      "x": 148,
+      "y": 618
+    },
+    {
+      "loc_name": "Sahasrahlas Hut",
+      "is_item": false,
+      "x": 607,
+      "y": 340
+    },
+    {
+      "loc_name": "Cave Shop (Lake Hylia)",
+      "is_item": false,
+      "x": 544,
+      "y": 575
+    },
+    {
+      "loc_name": "Capacity Upgrade",
+      "is_item": false,
+      "x": 593,
+      "y": 639
+    },
+    {
+      "loc_name": "Kakariko Well Drop",
+      "is_item": false,
+      "x": 16,
+      "y": 319
+    },
+    {
+      "loc_name": "Blacksmiths Hut",
+      "is_item": false,
+      "x": 227,
+      "y": 399
+    },
+    {
+      "loc_name": "Bat Cave Drop",
+      "is_item": false,
+      "x": 242,
+      "y": 421
+    },
+    {
+      "loc_name": "Sick Kids House",
+      "is_item": false,
+      "x": 116,
+      "y": 403
+    },
+    {
+      "loc_name": "North Fairy Cave Drop",
+      "is_item": false,
+      "x": 481,
+      "y": 232
+    },
+    {
+      "loc_name": "Lost Woods Gamble",
+      "is_item": false,
+      "x": 138,
+      "y": 11
+    },
+    {
+      "loc_name": "Fortune Teller (Light)",
+      "is_item": false,
+      "x": 139,
+      "y": 243
+    },
+    {
+      "loc_name": "Snitch Lady (East)",
+      "is_item": false,
+      "x": 154,
+      "y": 362
+    },
+    {
+      "loc_name": "Snitch Lady (West)",
+      "is_item": false,
+      "x": 37,
+      "y": 350
+    },
+    {
+      "loc_name": "Bush Covered House",
+      "is_item": false,
+      "x": 151,
+      "y": 400
+    },
+    {
+      "loc_name": "Tavern (Front)",
+      "is_item": false,
+      "x": 119,
+      "y": 447
+    },
+    {
+      "loc_name": "Light World Bomb Hut",
+      "is_item": false,
+      "x": 19,
+      "y": 446
+    },
+    {
+      "loc_name": "Kakariko Shop",
+      "is_item": false,
+      "x": 82,
+      "y": 438
+    },
+    {
+      "loc_name": "Lost Woods Hideout Drop",
+      "is_item": false,
+      "x": 141,
+      "y": 98
+    },
+    {
+      "loc_name": "Lumberjack Tree Tree",
+      "is_item": false,
+      "x": 224,
+      "y": 55
+    },
+    {
+      "loc_name": "Cave 45",
+      "is_item": false,
+      "x": 199,
+      "y": 619
+    },
+    {
+      "loc_name": "Graveyard Cave",
+      "is_item": false,
+      "x": 427,
+      "y": 206
+    },
+    {
+      "loc_name": "Checkerboard Cave",
+      "is_item": false,
+      "x": 131,
+      "y": 583
+    },
+    {
+      "loc_name": "Mini Moldorm Cave",
+      "is_item": false,
+      "x": 488,
+      "y": 704
+    },
+    {
+      "loc_name": "Long Fairy Cave",
+      "is_item": false,
+      "x": 734,
+      "y": 525
+    },
+    {
+      "loc_name": "Good Bee Cave",
+      "is_item": false,
+      "x": 684,
+      "y": 578
+    },
+    {
+      "loc_name": "20 Rupee Cave",
+      "is_item": false,
+      "x": 676,
+      "y": 592
+    },
+    {
+      "loc_name": "50 Rupee Cave",
+      "is_item": false,
+      "x": 233,
+      "y": 718
+    },
+    {
+      "loc_name": "Ice Rod Cave",
+      "is_item": false,
+      "x": 670,
+      "y": 578
+    },
+    {
+      "loc_name": "Bonk Rock Cave",
+      "is_item": false,
+      "x": 292,
+      "y": 219
+    },
+    {
+      "loc_name": "Library",
+      "is_item": false,
+      "x": 116,
+      "y": 495
+    },
+    {
+      "loc_name": "Potion Shop",
+      "is_item": false,
+      "x": 599,
+      "y": 251
+    },
+    {
+      "loc_name": "Sanctuary Grave",
+      "is_item": false,
+      "x": 388,
+      "y": 219
+    },
+    {
+      "loc_name": "Hookshot Fairy",
+      "is_item": false,
+      "x": 632,
+      "y": 109
+    },
+    {
+      "loc_name": "Mimic Cave",
+      "is_item": false,
+      "x": 632,
+      "y": 68
+    },
+    {
+      "loc_name": "Lumberjack House",
+      "is_item": false,
+      "x": 251,
+      "y": 46
+    },
+    {
+      "loc_name": "Lake Hylia Fortune Teller",
+      "is_item": false,
+      "x": 486,
+      "y": 602
+    },
+    {
+      "loc_name": "Kakariko Gamble Game",
+      "is_item": false,
+      "x": 160,
+      "y": 526
+    },
+    {
+      "loc_name": "Bombos Tablet",
+      "is_item": true,
+      "x": 163,
+      "y": 689
+    },
+    {
+      "loc_name": "Bottle Merchant",
+      "is_item": true,
+      "x": 71,
+      "y": 347
+    },
+    {
+      "loc_name": "Desert Ledge",
+      "is_item": true,
+      "x": 17,
+      "y": 684
+    },
+    {
+      "loc_name": "Ether Tablet",
+      "is_item": true,
+      "x": 314,
+      "y": 13
+    },
+    {
+      "loc_name": "Floating Island",
+      "is_item": true,
+      "x": 608,
+      "y": 13
+    },
+    {
+      "loc_name": "Flute Spot",
+      "is_item": true,
+      "x": 215,
+      "y": 496
+    },
+    {
+      "loc_name": "Hobo",
+      "is_item": true,
+      "x": 532,
+      "y": 523
+    },
+    {
+      "loc_name": "King Zora",
+      "is_item": true,
+      "x": 728,
+      "y": 98
+    },
+    {
+      "loc_name": "Lake Hylia Island",
+      "is_item": true,
+      "x": 544,
+      "y": 621
+    },
+    {
+      "loc_name": "Master Sword Pedestal",
+      "is_item": true,
+      "x": 30,
+      "y": 37
+    },
+    {
+      "loc_name": "Maze Race",
+      "is_item": true,
+      "x": 23,
+      "y": 525
+    },
+    {
+      "loc_name": "Mushroom",
+      "is_item": true,
+      "x": 93,
+      "y": 65
+    },
+    {
+      "loc_name": "Old Man",
+      "is_item": true,
+      "x": 320,
+      "y": 175
+    },
+    {
+      "loc_name": "Purple Chest",
+      "is_item": true,
+      "x": 257,
+      "y": 674
+    },
+    {
+      "loc_name": "Spectacle Rock",
+      "is_item": true,
+      "x": 381,
+      "y": 64
+    },
+    {
+      "loc_name": "Sunken Treasure",
+      "is_item": true,
+      "x": 338,
+      "y": 700
+    },
+    {
+      "loc_name": "Zora's Ledge",
+      "is_item": true,
+      "x": 715,
+      "y": 98
+    }
+  ],
+  "dark_world": [
+    {
+      "loc_name": "Thieves Town",
+      "is_item": false,
+      "x": 93,
+      "y": 364
+    },
+    {
+      "loc_name": "Skull Woods First Section Door",
+      "is_item": false,
+      "x": 136,
+      "y": 111
+    },
+    {
+      "loc_name": "Skull Woods Second Section Door (East)",
+      "is_item": false,
+      "x": 108,
+      "y": 109
+    },
+    {
+      "loc_name": "Skull Woods Second Section Door (West)",
+      "is_item": false,
+      "x": 43,
+      "y": 98
+    },
+    {
+      "loc_name": "Skull Woods Final Section",
+      "is_item": false,
+      "x": 28,
+      "y": 38
+    },
+    {
+      "loc_name": "Ice Palace",
+      "is_item": false,
+      "x": 596,
+      "y": 647
+    },
+    {
+      "loc_name": "Misery Mire",
+      "is_item": false,
+      "x": 54,
+      "y": 603
+    },
+    {
+      "loc_name": "Palace of Darkness",
+      "is_item": false,
+      "x": 719,
+      "y": 295
+    },
+    {
+      "loc_name": "Swamp Palace",
+      "is_item": false,
+      "x": 351,
+      "y": 703
+    },
+    {
+      "loc_name": "Turtle Rock",
+      "is_item": false,
+      "x": 705,
+      "y": 60
+    },
+    {
+      "loc_name": "Dark Death Mountain Ledge (West)",
+      "is_item": false,
+      "x": 597,
+      "y": 68
+    },
+    {
+      "loc_name": "Dark Death Mountain Ledge (East)",
+      "is_item": false,
+      "x": 632,
+      "y": 68
+    },
+    {
+      "loc_name": "Turtle Rock Isolated Ledge Entrance",
+      "is_item": false,
+      "x": 614,
+      "y": 87
+    },
+    {
+      "loc_name": "Bumper Cave (Bottom)",
+      "is_item": false,
+      "x": 265,
+      "y": 132
+    },
+    {
+      "loc_name": "Bumper Cave (Top)",
+      "is_item": false,
+      "x": 268,
+      "y": 115
+    },
+    {
+      "loc_name": "Superbunny Cave (Top)",
+      "is_item": false,
+      "x": 644,
+      "y": 47
+    },
+    {
+      "loc_name": "Superbunny Cave (Bottom)",
+      "is_item": false,
+      "x": 632,
+      "y": 109
+    },
+    {
+      "loc_name": "Hookshot Cave",
+      "is_item": false,
+      "x": 623,
+      "y": 50
+    },
+    {
+      "loc_name": "Hookshot Cave Back Entrance",
+      "is_item": false,
+      "x": 599,
+      "y": 11
+    },
+    {
+      "loc_name": "Ganons Tower",
+      "is_item": false,
+      "x": 421,
+      "y": 14
+    },
+    {
+      "loc_name": "Skull Woods First Section Hole (West)",
+      "is_item": false,
+      "x": 116,
+      "y": 132
+    },
+    {
+      "loc_name": "Skull Woods First Section Hole (East)",
+      "is_item": false,
+      "x": 146,
+      "y": 126
+    },
+    {
+      "loc_name": "Skull Woods First Section Hole (North)",
+      "is_item": false,
+      "x": 141,
+      "y": 97
+    },
+    {
+      "loc_name": "Skull Woods Second Section Hole",
+      "is_item": false,
+      "x": 90,
+      "y": 67
+    },
+    {
+      "loc_name": "Pyramid Hole",
+      "is_item": false,
+      "x": 372,
+      "y": 306
+    },
+    {
+      "loc_name": "Pyramid Fairy",
+      "is_item": false,
+      "x": 350,
+      "y": 365
+    },
+    {
+      "loc_name": "East Dark World Hint",
+      "is_item": false,
+      "x": 735,
+      "y": 525
+    },
+    {
+      "loc_name": "Palace of Darkness Hint",
+      "is_item": false,
+      "x": 636,
+      "y": 377
+    },
+    {
+      "loc_name": "Dark Lake Hylia Fairy",
+      "is_item": false,
+      "x": 618,
+      "y": 484
+    },
+    {
+      "loc_name": "Dark Lake Hylia Ledge Fairy",
+      "is_item": false,
+      "x": 670,
+      "y": 578
+    },
+    {
+      "loc_name": "Dark Lake Hylia Ledge Spike Cave",
+      "is_item": false,
+      "x": 676,
+      "y": 592
+    },
+    {
+      "loc_name": "Dark Lake Hylia Ledge Hint",
+      "is_item": false,
+      "x": 684,
+      "y": 578
+    },
+    {
+      "loc_name": "Hype Cave",
+      "is_item": false,
+      "x": 447,
+      "y": 584
+    },
+    {
+      "loc_name": "Bonk Fairy (Dark)",
+      "is_item": false,
+      "x": 353,
+      "y": 489
+    },
+    {
+      "loc_name": "Brewery",
+      "is_item": false,
+      "x": 81,
+      "y": 438
+    },
+    {
+      "loc_name": "C-Shaped House",
+      "is_item": false,
+      "x": 155,
+      "y": 362
+    },
+    {
+      "loc_name": "Chest Game",
+      "is_item": false,
+      "x": 37,
+      "y": 350
+    },
+    {
+      "loc_name": "Dark World Hammer Peg Cave",
+      "is_item": false,
+      "x": 236,
+      "y": 454
+    },
+    {
+      "loc_name": "Red Shield Shop",
+      "is_item": false,
+      "x": 248,
+      "y": 345
+    },
+    {
+      "loc_name": "Dark Sanctuary Hint",
+      "is_item": false,
+      "x": 344,
+      "y": 206
+    },
+    {
+      "loc_name": "Fortune Teller (Dark)",
+      "is_item": false,
+      "x": 140,
+      "y": 243
+    },
+    {
+      "loc_name": "Dark World Shop",
+      "is_item": false,
+      "x": 151,
+      "y": 399
+    },
+    {
+      "loc_name": "Dark World Lumberjack Shop",
+      "is_item": false,
+      "x": 251,
+      "y": 43
+    },
+    {
+      "loc_name": "Dark World Potion Shop",
+      "is_item": false,
+      "x": 602,
+      "y": 253
+    },
+    {
+      "loc_name": "Archery Game",
+      "is_item": false,
+      "x": 160,
+      "y": 526
+    },
+    {
+      "loc_name": "Mire Shed",
+      "is_item": false,
+      "x": 28,
+      "y": 602
+    },
+    {
+      "loc_name": "Dark Desert Hint",
+      "is_item": false,
+      "x": 148,
+      "y": 619
+    },
+    {
+      "loc_name": "Dark Desert Fairy",
+      "is_item": false,
+      "x": 81,
+      "y": 602
+    },
+    {
+      "loc_name": "Spike Cave",
+      "is_item": false,
+      "x": 429,
+      "y": 109
+    },
+    {
+      "loc_name": "Cave Shop (Dark Death Mountain)",
+      "is_item": false,
+      "x": 645,
+      "y": 109
+    },
+    {
+      "loc_name": "Dark Death Mountain Fairy",
+      "is_item": false,
+      "x": 303,
+      "y": 141
+    },
+    {
+      "loc_name": "Big Bomb Shop",
+      "is_item": false,
+      "x": 409,
+      "y": 517
+    },
+    {
+      "loc_name": "Dark Lake Hylia Shop",
+      "is_item": false,
+      "x": 485,
+      "y": 602
+    },
+    {
+      "loc_name": "Bumper Cave Ledge",
+      "is_item": true,
+      "x": 255,
+      "y": 116
+    },
+    {
+      "loc_name": "Catfish",
+      "is_item": true,
+      "x": 670,
+      "y": 128
+    },
+    {
+      "loc_name": "Digging Game",
+      "is_item": true,
+      "x": 42,
+      "y": 514
+    },
+    {
+      "loc_name": "Pyramid",
+      "is_item": true,
+      "x": 435,
+      "y": 339
+    },
+    {
+      "loc_name": "Stumpy",
+      "is_item": true,
+      "x": 230,
+      "y": 512
+    }
+  ],
   "markers": [],
   "notes": {}
 }
