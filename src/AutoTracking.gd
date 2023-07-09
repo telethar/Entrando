@@ -34,6 +34,7 @@ var locations_to_sram = {
     "HammerPegs": [[0x24F, 0x04]],
     "MiniMoldorm": [[0x246, 0xF0], [0x247, 0x04]],
     "Waterfall": [[0x228, 0x30]],
+    "PyramidFairy": [[0x22C, 0x30]],
     "Mimic": [[0x218, 0x10]],
     "ChestGame": [[0x20D, 0x04]],
     "ChickenHouse": [[0x210, 0x10]],
@@ -70,7 +71,7 @@ var locations_to_sram = {
     "Bumper Cave Ledge": [[0x2CA, 0x40]],
     "Catfish": [[0x410, 0x20]],
     "Digging Game": [[0x2E8, 0x40]],
-    "Pyramid": [[0x22C, 0x30]],
+    "Pyramid": [[0x2DB, 0x40]],
     "Stumpy": [[0x410, 0x08]],
 }
 var ow_item_locs = ["Bombos Tablet",
@@ -173,7 +174,7 @@ func _on_data():
 func get_location_data():
      _client.disconnect("data_received", self, "_on_data")
      _client.connect("data_received", self, "_build_location_data")
-     read_snes_mem(SAVEDATA_START, 0x2FF)
+     read_snes_mem(SAVEDATA_START, 0x400)
      read_snes_mem(SAVEDATA_START + 0x410, 2)
 
 func process_location_data():
