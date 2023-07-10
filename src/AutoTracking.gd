@@ -74,28 +74,6 @@ var locations_to_sram = {
     "Pyramid": [[0x2DB, 0x40]],
     "Stumpy": [[0x410, 0x08]],
 }
-var ow_item_locs = ["Bombos Tablet",
-    "Bottle Merchant",
-    "Desert Ledge",
-    "Ether Tablet",
-    "Floating Island",
-    "Flute Spot",
-    "Hobo",
-    "King Zora",
-    "Lake Hylia Island",
-    "Master Sword Pedestal",
-    "Maze Race",
-    "Mushroom",
-    "Old Man",
-    "Purple Chest",
-    "Spectacle Rock",
-    "Sunken Treasure",
-    "Zora's Ledge",
-    "Bumper Cave Ledge",
-    "Catfish",
-    "Digging Game",
-    "Pyramid",
-    "Stumpy"]
 
 enum AUTOTRACKER_STATUS {
     DISCONNECTED,
@@ -115,8 +93,6 @@ func _ready() -> void:
     Events.connect("start_autotracking", self, "_connect_at")
     _client.connect("data_received", self, "_on_data")
 
-
-
 func _connect_at():
     # Initiate connection to the given URL.
     if _at_status != AUTOTRACKER_STATUS.DISCONNECTED:
@@ -133,7 +109,6 @@ func _connect_at():
         _timer.connect("timeout", self, "_on_Timer_timeout")
         _timer.set_wait_time(1.0)
         _timer.set_one_shot(false) 
-
 
 func _closed(_was_clean = false):
     _timer.stop()
@@ -169,7 +144,6 @@ func _on_data():
             _at_status = AUTOTRACKER_STATUS.TRACKING
             _timer.paused = true
             get_location_data()
-            
 
 func get_location_data():
      _client.disconnect("data_received", self, "_on_data")
@@ -179,36 +153,48 @@ func get_location_data():
 
 func process_location_data():
     if _old_location_data == null:
-        _old_location_data = _location_data
-    else:
-        for loc in locations_to_sram:
-            var locs_data = locations_to_sram[loc]
-            var all_locs_checked = true            
-            var any_locs_checked  = false
-            var was_any_change = false
-            for loc_data in locs_data:
-                var addr = loc_data[0]
-                var mask = loc_data[1]
-                var new_value = _location_data[addr] & mask
-                var old_value = _old_location_data[addr] & mask
-                was_any_change = was_any_change || (new_value != old_value)
-                any_locs_checked = any_locs_checked || (new_value == mask)
-                all_locs_checked = all_locs_checked && (new_value == mask)
-            if was_any_change and (all_locs_checked or any_locs_checked):
-                var item_node = get_parent().find_node(loc).get_child(0)
-                if loc in ow_item_locs:
-                    item_node.hide()
-                    # Do this to allow ctrl-z to undo
-                    Util.add_hidden(item_node)
-                else:
-                    item_node.set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
-                    item_node.set_pressed(true)
+        _old_location_data = PoolByteArray()
+        _old_location_data.resize(_location_data.size())
+        _old_location_data.fill(0)
+
+    var underworld = get_parent().find_node("GUILayer")
+    var lightworld = get_parent().find_node("LightWorld")
+    var darkworld = get_parent().find_node("DarkWorld")
+
+    for loc in locations_to_sram:
+        var locs_data = locations_to_sram[loc]
+        var all_locs_checked = true            
+        var any_locs_checked  = false
+        var was_any_change = false
+        for loc_data in locs_data:
+            var addr = loc_data[0]
+            var mask = loc_data[1]
+            var new_value = _location_data[addr] & mask
+            var old_value = _old_location_data[addr] & mask
+            was_any_change = was_any_change || (new_value != old_value)
+            any_locs_checked = any_locs_checked || (new_value == mask)
+            all_locs_checked = all_locs_checked && (new_value == mask)
+        if was_any_change and (all_locs_checked or any_locs_checked):
+            var underworld_node = underworld.find_node(loc)
+            if (underworld_node):
+                underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
+                underworld_node.get_child(0).set_pressed(true)
+            else:
+                var overworld_node = lightworld.find_node(loc)
+                if (overworld_node == null):
+                    overworld_node = darkworld.find_node(loc)
+                    if (overworld_node == null):
+                        print("Error Autotracking: Unable to find node " + loc)
+                        continue
+                overworld_node.get_child(0).hide()
+                # Do this to allow ctrl-z to undo
+                Util.add_hidden(overworld_node.get_child(0))
 
     _old_location_data = _location_data
     _location_data = null
     _timer.paused = false
     _at_status = AUTOTRACKER_STATUS.CONNECTED
-     
+
 func _build_location_data():
     var res_raw =_client.get_peer(1).get_packet()
     if _location_data == null:
@@ -228,7 +214,6 @@ func _build_location_data():
         _client.connect("data_received", self, "_on_data")
         process_location_data()
 
-
 func read_snes_mem(addr, size):
     var read_data = {'Opcode': "GetAddress", 'Space': "SNES", 'Operands': ["%x" % addr, "%x" % size]}
     _client.get_peer(1).put_packet(JSON.print(read_data).to_utf8())
@@ -239,4 +224,3 @@ func _on_Timer_timeout():
 
 func _process(_delta):
     _client.poll()
-
