@@ -11,14 +11,20 @@ enum {
     MENU_OW_ITEMS = 7,
     # 8 separator
     MENU_START_AUTOTRACKING = 9,
+    MENU_AUTOTRACKING_SETTINGS = 10,
 }
 
 onready var menu = $PopupMenu
+onready var autotrack_menu = $ATContainer/AutoTrackingSettings
+onready var autotrack_menu_modal = $ATContainer/AutoTrackingSettings/Shadow
+onready var autotrack_menu_container = $ATContainer/AutoTrackingSettings/Shadow/Container/BG
 onready var tooltip = $TooltipPopup
 onready var tooltip_container = $TooltipPopup/Margin/Container
 onready var tooltip_timer = $TooltipPopup/Timer
 onready var notes_modal = $Container/Notes/Shadow
 onready var notes_container = $Container/Notes/Shadow/Container/BG
+
+onready var autotracking_scene: PackedScene = preload("res://src/GUI/AutoTrackingSettings.tscn")
 
 var last_hovered: MarginContainer
 
@@ -36,9 +42,10 @@ func _ready() -> void:
     menu.add_item("Hide OW Item Markers", MENU_OW_ITEMS)
     menu.add_separator()
     menu.add_item("(Re)connect Auto-Tracking", MENU_START_AUTOTRACKING)
+    menu.add_item("Auto-Tracking Settings", MENU_AUTOTRACKING_SETTINGS)
 
     tooltip_timer.connect("timeout", self, "_on_tooltip_timeout")
-
+    
     for child in get_tree().get_nodes_in_group(Util.GROUP_NOTES):
         child.connect("mouse_entered", self, "_on_notes_entered", [child])
         child.connect("mouse_exited", self, "_on_notes_exited")
@@ -85,6 +92,8 @@ func menu_pressed(id: int) -> void:
             Events.emit_signal("tracker_restarted")
         MENU_START_AUTOTRACKING:
             Events.emit_signal("start_autotracking")
+        MENU_AUTOTRACKING_SETTINGS:
+            autotrack_menu_modal.show()
 
 func _on_notes_entered(node: Node) -> void:
     if tooltip.visible:

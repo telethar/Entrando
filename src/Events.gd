@@ -19,3 +19,13 @@ signal notes_clicked(node)
 
 # warning-ignore:unused_signal
 signal start_autotracking()
+# warning-ignore:unused_signal
+signal update_autotracking_port(port)
+# warning-ignore:unused_signal
+signal set_discovered_devices(devices)
+# warning-ignore:unused_signal
+signal set_selected_device(device)
+# warning-ignore:unused_signal
+signal set_connected_device(device)
+# warning-ignore:unused_signal
+signal refresh_devices()

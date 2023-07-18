@@ -4,7 +4,9 @@ const DISABLED_TEXTURE = preload("res://assets/icons/disabled.png");
 const TODO_TEXTURE = preload("res://assets/icons/todo.png");
 
 # The URL we will connect to
-export var websocket_url = "ws://localhost:8080"
+export var websocket_url = "ws://localhost:"
+export var websocket_port = 8080
+export var device_name = ""
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
@@ -85,6 +87,9 @@ enum AUTOTRACKER_STATUS {
 
 var _at_status = AUTOTRACKER_STATUS.DISCONNECTED
 
+onready var status_label = $"/root/Tracker/GUILayer/GUI/Container/Margin/HSplitContainer/NotesButtons/VBoxContainer/AutoTrackStatus"
+
+
 func _ready() -> void:
     # Autotracking stuff
     _client.connect("connection_closed", self, "_closed")
@@ -92,17 +97,30 @@ func _ready() -> void:
     _client.connect("connection_established", self, "_connected")
     Events.connect("start_autotracking", self, "_connect_at")
     _client.connect("data_received", self, "_on_data")
+    Events.connect("update_autotracking_port", self, "_on_update_autotracking_port")
+    Events.connect("set_selected_device", self, "_on_set_selected_device")
+    Events.connect("refresh_devices", self, "_connect_at")
+
+    var config = ConfigFile.new()
+    var err = config.load("user://config.cfg")
+    if err == OK:
+        if config.get_value("AutoTracking", "Device"):
+            device_name = config.get_value("AutoTracking", "Device")
+        if config.get_value("AutoTracking", "Port"):
+            websocket_port = config.get_value("AutoTracking", "Port")
 
 func _connect_at():
+    var final_ws_url = websocket_url + str(websocket_port)
     # Initiate connection to the given URL.
     if _at_status != AUTOTRACKER_STATUS.DISCONNECTED:
+        _reconnect()
         return
 
     _client.set_verify_ssl_enabled(false)
-    var err = _client.connect_to_url(websocket_url)
+    var err = _client.connect_to_url(final_ws_url)
+
     if err != OK:
-        print("Unable to connect")
-        set_process(false)
+        status_label.text = "Error" + str(err)
     else:
         _timer = Timer.new()
         add_child(_timer)
@@ -110,13 +128,29 @@ func _connect_at():
         _timer.set_wait_time(1.0)
         _timer.set_one_shot(false) 
 
+func _reconnect():
+    Events.emit_signal('set_connected_device', 0)
+    Events.emit_signal('set_discovered_devices', [])
+    _client.disconnect_from_host()
+    while _at_status != AUTOTRACKER_STATUS.DISCONNECTED:
+        yield(get_tree().create_timer(0.1), "timeout")
+    _connect_at()   
+
+func _on_update_autotracking_port(_port):
+    websocket_port = _port
+    _reconnect()
+
+func _on_set_selected_device(_device):
+    device_name = _device
+    _reconnect()
+
 func _closed(_was_clean = false):
     _timer.stop()
     remove_child(_timer)
     _location_data = null
     _old_location_data = null
     _at_status = AUTOTRACKER_STATUS.DISCONNECTED
-    OS.set_window_title("Entrando - Auto-tracking disabled")
+    status_label.text = "Disabled"
 
 func _connected(_proto = ""):
     _client.get_peer(1).set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
@@ -130,11 +164,24 @@ func _on_data():
         var res = JSON.parse(res_raw.get_string_from_utf8())
         if res.error != OK:
             print("Error parsing JSON")
-            return    
-        var device = res.result['Results'][0]
+            return
+        if res.result['Results'].size() == 0:
+            Events.emit_signal('set_connected_device', 0)
+            Events.emit_signal('set_discovered_devices', [])
+            status_label.text = "No devices found"
+            return
+        var device_index = 0
+        if device_name != "":
+            for i in range(res.result['Results'].size()):
+                if res.result['Results'][i] == device_name:
+                    device_index = i
+                    break
+        var device = res.result['Results'][device_index]
+        Events.emit_signal('set_discovered_devices', res.result['Results'])
         var connect_data = {'Opcode': "Attach", 'Space': "SNES", 'Operands': [device]}
         _client.get_peer(1).put_packet(JSON.print(connect_data).to_utf8())
-        OS.set_window_title("Entrando - Auto-tracking enabled: connected to " + device)
+        Events.emit_signal('set_connected_device', device_index)
+        status_label.text = "Connected to " + device
 
         _at_status = AUTOTRACKER_STATUS.CONNECTED
         _timer.start()
