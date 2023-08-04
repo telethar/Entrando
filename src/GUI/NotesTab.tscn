@@ -11,13 +11,10 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ItemsMargin" type="MarginContainer" parent="."]
 margin_right = 740.0
-margin_bottom = 864.0
+margin_bottom = 914.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 4
@@ -29,7 +26,7 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 736.0
-margin_bottom = 856.0
+margin_bottom = 906.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -41,7 +38,7 @@ text = "Check Paths:"
 [node name="ScrollContainer" type="ScrollContainer" parent="ItemsMargin/Paths"]
 margin_top = 18.0
 margin_right = 728.0
-margin_bottom = 848.0
+margin_bottom = 898.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -50,7 +47,7 @@ __meta__ = {
 
 [node name="Items" type="VBoxContainer" parent="ItemsMargin/Paths/ScrollContainer"]
 margin_right = 728.0
-margin_bottom = 830.0
+margin_bottom = 880.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -60,7 +57,7 @@ __meta__ = {
 [node name="NotesMargin" type="MarginContainer" parent="."]
 margin_left = 752.0
 margin_right = 1492.0
-margin_bottom = 864.0
+margin_bottom = 914.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 8
@@ -72,7 +69,7 @@ custom_constants/margin_bottom = 8
 margin_left = 4.0
 margin_top = 8.0
 margin_right = 732.0
-margin_bottom = 856.0
+margin_bottom = 906.0
 
 [node name="ChecksLabel" type="Label" parent="NotesMargin/VBoxContainer"]
 margin_right = 728.0
@@ -144,7 +141,7 @@ text = "Notes:"
 [node name="NotesEdit" type="TextEdit" parent="NotesMargin/VBoxContainer"]
 margin_top = 80.0
 margin_right = 728.0
-margin_bottom = 848.0
+margin_bottom = 898.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
