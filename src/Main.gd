@@ -17,7 +17,9 @@ func _ready() -> void:
     Events.connect("save_file_clicked", self, "open_save_dialog")
     Events.connect("load_file_clicked", self, "open_load_dialog")
     Events.emit_signal("start_autotracking")
-    
+
+	set_window_size()
+
     load_data("res://assets/map/750.json")
 
 func _notification(what: int) -> void:
@@ -34,6 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
         open_load_dialog()
 
 func _on_confirmed() -> void:
+    save_window_size()
     get_tree().quit()
 
 func _on_cancelled() -> void:
@@ -107,3 +110,30 @@ func generate_marker(texture: Texture, color: Color, connector: String) -> void:
     Util.last_marker = marker
     markers.add_child(marker)
     marker.set_sprite(texture)
+
+func set_window_size () -> void:
+	var save_file = File.new()
+	var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
+	if !save_file.file_exists(path):
+		return
+	if save_file.open(path, File.READ) != OK:
+		return
+	var data = parse_json(save_file.get_as_text())
+	OS.window_size = str2var("Vector2" + data.size)
+	OS.window_position = str2var("Vector2" + data.screen)
+
+func save_window_size () -> void:
+	var size = OS.get_real_window_size()
+	size.x = size.x - 16
+	size.y = size.y - 39
+	var data = {
+		"size": size,
+		"screen": OS.get_screen_position()
+	}
+	var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
+	path.replace(".exe", "")
+	var save_file = File.new()
+	if save_file.open(path, File.WRITE) != OK:
+		return
+	save_file.store_string(to_json(data))
+	save_file.close()
