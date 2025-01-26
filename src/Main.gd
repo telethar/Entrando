@@ -18,7 +18,7 @@ func _ready() -> void:
     Events.connect("load_file_clicked", self, "open_load_dialog")
     Events.emit_signal("start_autotracking")
 
-	set_window_size()
+    set_window_size()
 
     load_data("res://assets/map/750.json")
 
