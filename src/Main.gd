@@ -111,27 +111,21 @@ func generate_marker(texture: Texture, color: Color, connector: String) -> void:
     markers.add_child(marker)
     marker.set_sprite(texture)
 
-func set_window_size () -> void:
+func set_window_size() -> void:
 	var save_file = File.new()
 	var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
-	if !save_file.file_exists(path):
-		return
-	if save_file.open(path, File.READ) != OK:
+	if !save_file.file_exists(path) or save_file.open(path, File.READ) != OK:
 		return
 	var data = parse_json(save_file.get_as_text())
 	OS.window_size = str2var("Vector2" + data.size)
 	OS.window_position = str2var("Vector2" + data.screen)
 
-func save_window_size () -> void:
-	var size = OS.get_real_window_size()
-	size.x = size.x - 16
-	size.y = size.y - 39
-	var data = {
-		"size": size,
-		"screen": OS.get_screen_position()
+func save_window_size() -> void:
+	var data = {    
+		"size": OS.window_size,
+		"screen": OS.window_position
 	}
 	var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
-	path.replace(".exe", "")
 	var save_file = File.new()
 	if save_file.open(path, File.WRITE) != OK:
 		return
