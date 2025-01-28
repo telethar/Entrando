@@ -1,0 +1,241 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/icons/dungeons/at.png" type="Texture" id=1]
+[ext_resource path="res://assets/font/Ubuntu-16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/icons/dungeons/sw.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/dungeons/th.png" type="Texture" id=4]
+[ext_resource path="res://assets/icons/dungeons/hc.png" type="Texture" id=5]
+[ext_resource path="res://assets/icons/dungeons/tr.png" type="Texture" id=6]
+[ext_resource path="res://assets/icons/dungeons/ep.png" type="Texture" id=7]
+[ext_resource path="res://assets/icons/dungeons/dp.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/dungeons/sp.png" type="Texture" id=9]
+[ext_resource path="res://assets/icons/dungeons/ip.png" type="Texture" id=10]
+[ext_resource path="res://assets/icons/dungeons/pd.png" type="Texture" id=11]
+[ext_resource path="res://assets/icons/dungeons/tt.png" type="Texture" id=12]
+[ext_resource path="res://assets/icons/dungeons/mm.png" type="Texture" id=13]
+[ext_resource path="res://assets/icons/dungeons/gt.png" type="Texture" id=14]
+[ext_resource path="res://src/GUI/NotesWindow.gd" type="Script" id=15]
+[ext_resource path="res://src/GUI/DoorsButton.tscn" type="PackedScene" id=16]
+
+[node name="NotesWindow" type="HSplitContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1148.0
+script = ExtResource( 15 )
+
+[node name="NotesMargin" type="MarginContainer" parent="."]
+margin_right = 345.0
+margin_bottom = 950.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 4
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NotesMargin"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 341.0
+margin_bottom = 942.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NotesLabel" type="Label" parent="NotesMargin/VBoxContainer"]
+margin_right = 333.0
+margin_bottom = 14.0
+text = "Notes:"
+
+[node name="NotesEdit" type="TextEdit" parent="NotesMargin/VBoxContainer"]
+margin_top = 18.0
+margin_right = 333.0
+margin_bottom = 732.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+highlight_current_line = true
+show_line_numbers = true
+highlight_all_occurrences = true
+wrap_enabled = true
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChecksLabel" type="Label" parent="NotesMargin/VBoxContainer"]
+margin_top = 736.0
+margin_right = 333.0
+margin_bottom = 750.0
+size_flags_horizontal = 3
+text = "Checks:"
+
+[node name="Current" type="HBoxContainer" parent="NotesMargin/VBoxContainer"]
+margin_top = 754.0
+margin_right = 333.0
+margin_bottom = 770.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NotesMargin/VBoxContainer/Current"]
+margin_top = 1.0
+margin_right = 24.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 24, 0 )
+text = "0"
+
+[node name="Slider" type="HSlider" parent="NotesMargin/VBoxContainer/Current"]
+margin_left = 28.0
+margin_right = 333.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 40.0
+rounded = true
+tick_count = 40
+ticks_on_borders = true
+
+[node name="Total" type="HBoxContainer" parent="NotesMargin/VBoxContainer"]
+margin_top = 774.0
+margin_right = 333.0
+margin_bottom = 790.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NotesMargin/VBoxContainer/Total"]
+margin_top = 1.0
+margin_right = 24.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 24, 0 )
+text = "0"
+
+[node name="Slider" type="HSlider" parent="NotesMargin/VBoxContainer/Total"]
+margin_left = 28.0
+margin_right = 333.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 40.0
+rounded = true
+tick_count = 40
+ticks_on_borders = true
+
+[node name="Dungeons" type="VBoxContainer" parent="NotesMargin/VBoxContainer"]
+margin_top = 794.0
+margin_right = 333.0
+margin_bottom = 934.0
+
+[node name="LWDungeons" type="HBoxContainer" parent="NotesMargin/VBoxContainer/Dungeons"]
+margin_right = 333.0
+margin_bottom = 44.0
+
+[node name="HC" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
+total_checks = 8
+icon = ExtResource( 5 )
+color = Color( 1, 1, 1, 1 )
+
+[node name="EP" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
+margin_left = 64.0
+margin_right = 124.0
+total_checks = 6
+icon = ExtResource( 7 )
+color = Color( 0.627451, 0.25098, 0.905882, 1 )
+
+[node name="DP" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
+margin_left = 128.0
+margin_right = 188.0
+total_checks = 6
+icon = ExtResource( 8 )
+color = Color( 1, 0, 0, 1 )
+
+[node name="TH" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
+margin_left = 192.0
+margin_right = 252.0
+total_checks = 6
+icon = ExtResource( 4 )
+color = Color( 1, 0.556863, 0.839216, 1 )
+
+[node name="CT" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
+margin_left = 256.0
+margin_right = 316.0
+total_checks = 2
+icon = ExtResource( 1 )
+color = Color( 1, 0.647059, 0, 1 )
+
+[node name="DWDungeons1" type="HBoxContainer" parent="NotesMargin/VBoxContainer/Dungeons"]
+margin_top = 48.0
+margin_right = 333.0
+margin_bottom = 92.0
+
+[node name="PD" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
+total_checks = 14
+icon = ExtResource( 11 )
+color = Color( 1, 1, 0, 1 )
+
+[node name="SP" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
+margin_left = 64.0
+margin_right = 124.0
+total_checks = 10
+icon = ExtResource( 9 )
+color = Color( 0.105882, 0.937255, 1, 1 )
+
+[node name="SW" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
+margin_left = 128.0
+margin_right = 188.0
+total_checks = 8
+icon = ExtResource( 3 )
+color = Color( 0.419608, 0.831373, 0.419608, 1 )
+
+[node name="TT" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
+margin_left = 192.0
+margin_right = 252.0
+total_checks = 8
+icon = ExtResource( 12 )
+color = Color( 1, 0, 1, 1 )
+
+[node name="DWDungeons2" type="HBoxContainer" parent="NotesMargin/VBoxContainer/Dungeons"]
+margin_top = 96.0
+margin_right = 333.0
+margin_bottom = 140.0
+
+[node name="IP" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
+total_checks = 8
+icon = ExtResource( 10 )
+color = Color( 0.392157, 0.65098, 0.929412, 1 )
+
+[node name="MM" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
+margin_left = 64.0
+margin_right = 124.0
+total_checks = 8
+icon = ExtResource( 13 )
+color = Color( 0, 1, 0, 1 )
+
+[node name="TR" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
+margin_left = 128.0
+margin_right = 188.0
+total_checks = 12
+icon = ExtResource( 6 )
+color = Color( 1, 0.894118, 0.768627, 1 )
+
+[node name="GT" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
+margin_left = 192.0
+margin_right = 252.0
+total_checks = 27
+icon = ExtResource( 14 )
+color = Color( 0.501961, 0, 0, 1 )
+
+[node name="DungeonsMargin" type="MarginContainer" parent="."]
+margin_left = 357.0
+margin_right = 702.0
+margin_bottom = 950.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DungeonsMargin"]
+margin_left = 4.0
+margin_top = 8.0
+margin_right = 337.0
+margin_bottom = 942.0

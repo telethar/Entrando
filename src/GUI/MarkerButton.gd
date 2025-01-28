@@ -39,6 +39,12 @@ export(String,
 	"smith",
 	"big_bomb",
 	"library",
+	
+	#dropdowns
+	"well",
+	"uncle",
+	"hideout",
+	"lumberjacks",
 
 	# items
 	"sword",

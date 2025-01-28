@@ -30,7 +30,7 @@ Util="*res://src/Util.gd"
 
 [display]
 
-window/size/width=1500
+window/size/width=1850
 window/size/height=950
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

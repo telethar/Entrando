@@ -12,6 +12,8 @@ enum {
 	# 8 separator
 	MENU_START_AUTOTRACKING = 9,
 	MENU_AUTOTRACKING_SETTINGS = 10,
+	# 11 separator
+	MENU_SHOW_DOORS_NOTES = 12,
 }
 
 onready var menu = $PopupMenu
@@ -23,6 +25,7 @@ onready var tooltip_container = $TooltipPopup/Margin/Container
 onready var tooltip_timer = $TooltipPopup/Timer
 onready var notes_modal = $Container/Notes/Shadow
 onready var notes_container = $Container/Notes/Shadow/Container/BG
+onready var notes_popup = $NotesPopUp
 
 onready var autotracking_scene: PackedScene = preload("res://src/GUI/AutoTrackingSettings.tscn")
 
@@ -43,6 +46,8 @@ func _ready() -> void:
 	menu.add_separator()
 	menu.add_item("(Re)connect Auto-Tracking", MENU_START_AUTOTRACKING)
 	menu.add_item("Auto-Tracking Settings", MENU_AUTOTRACKING_SETTINGS)
+	menu.add_separator()
+	menu.add_item("Show Doors Notes", MENU_SHOW_DOORS_NOTES)
 
 	tooltip_timer.connect("timeout", self, "_on_tooltip_timeout")
 	
@@ -94,6 +99,8 @@ func menu_pressed(id: int) -> void:
 			Events.emit_signal("start_autotracking")
 		MENU_AUTOTRACKING_SETTINGS:
 			autotrack_menu_modal.show()
+		MENU_SHOW_DOORS_NOTES:
+			notes_popup.show()
 
 func _on_notes_entered(node: Node) -> void:
 	if tooltip.visible:

@@ -16,6 +16,12 @@ signal mode_changed(new_mode)
 signal marker_clicked(texture, color, connector)
 # warning-ignore:unused_signal
 signal notes_clicked(node)
+# warning-ignore:unused_signal
+signal dungeon_clicked(node)
+# warning-ignore:unused_signal
+signal current_checks_changed(_value)
+# warning-ignore:unused_signal
+signal total_checks_changed(_value)
 
 # warning-ignore:unused_signal
 signal start_autotracking()

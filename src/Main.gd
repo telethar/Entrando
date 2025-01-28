@@ -131,3 +131,4 @@ func save_window_size() -> void:
 		return
 	save_file.store_string(to_json(data))
 	save_file.close()
+
