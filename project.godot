@@ -28,10 +28,6 @@ config/windows_native_icon="res://assets/icon.ico"
 Events="*res://src/Events.gd"
 Util="*res://src/Util.gd"
 
-[debug]
-
-gdscript/warnings/return_value_discarded=false
-
 [display]
 
 window/size/width=1500

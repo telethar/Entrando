@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=111 format=2]
 
 [ext_resource path="res://src/GUI/MarkerButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/GUI/GUI.gd" type="Script" id=2]
@@ -29,7 +29,6 @@
 [ext_resource path="res://assets/icons/connectors/keese_cave.png" type="Texture" id=27]
 [ext_resource path="res://assets/icons/connectors/library.png" type="Texture" id=28]
 [ext_resource path="res://assets/icons/connectors/spike.png" type="Texture" id=29]
-[ext_resource path="res://assets/icons/dungeons/tr-u.png" type="Texture" id=30]
 [ext_resource path="res://assets/icons/dungeons/gt.png" type="Texture" id=31]
 [ext_resource path="res://assets/icons/dungeons/ganon.png" type="Texture" id=32]
 [ext_resource path="res://assets/icons/items/big_key.png" type="Texture" id=33]
@@ -53,9 +52,7 @@
 [ext_resource path="res://assets/icons/dungeons/hc-r.png" type="Texture" id=51]
 [ext_resource path="res://assets/icons/dungeons/ep.png" type="Texture" id=52]
 [ext_resource path="res://assets/icons/dungeons/dp-l.png" type="Texture" id=53]
-[ext_resource path="res://assets/icons/dungeons/dp-d.png" type="Texture" id=54]
 [ext_resource path="res://assets/icons/dungeons/dp-r.png" type="Texture" id=55]
-[ext_resource path="res://assets/icons/dungeons/dp-u.png" type="Texture" id=56]
 [ext_resource path="res://assets/icons/dungeons/th.png" type="Texture" id=57]
 [ext_resource path="res://assets/icons/dungeons/at.png" type="Texture" id=58]
 [ext_resource path="res://assets/icons/dungeons/pd.png" type="Texture" id=59]
@@ -65,7 +62,6 @@
 [ext_resource path="res://assets/icons/dungeons/ip.png" type="Texture" id=63]
 [ext_resource path="res://assets/icons/dungeons/mm.png" type="Texture" id=64]
 [ext_resource path="res://assets/icons/dungeons/tr-l.png" type="Texture" id=65]
-[ext_resource path="res://assets/icons/dungeons/tr-d.png" type="Texture" id=66]
 [ext_resource path="res://assets/icons/dungeons/tr-r.png" type="Texture" id=67]
 [ext_resource path="res://assets/icons/dungeons/hc.png" type="Texture" id=68]
 [ext_resource path="res://assets/icons/notes.png" type="Texture" id=69]
@@ -104,6 +100,42 @@
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 71 )
+
+[sub_resource type="StreamTexture" id=13]
+flags = 4
+load_path = "res://.import/dp-f.png-8c79f0105bebf09ac52b2c2422f8c0c3.stex"
+
+[sub_resource type="StreamTexture" id=9]
+flags = 4
+load_path = "res://.import/dp-b.png-eb1cbcb40c6d04af4ce43a989829b0d6.stex"
+
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+load_path = "res://.import/sw-bc.png-17cb95d19da0de5b979ccdd1ac99a249.stex"
+
+[sub_resource type="StreamTexture" id=5]
+flags = 4
+load_path = "res://.import/sw-l.png-531ae854c2ed4cffa67ec25ead37b22d.stex"
+
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/sw-r.png-b04b7d57b8c92717ce5beb4569406b57.stex"
+
+[sub_resource type="StreamTexture" id=8]
+flags = 4
+load_path = "res://.import/sw-b.png-0a4fbf8752a34c44a0b6f4ff95ab188e.stex"
+
+[sub_resource type="StreamTexture" id=10]
+flags = 4
+load_path = "res://.import/tr-f.png-516f280be5a8d0f4b0be375e923c5f04.stex"
+
+[sub_resource type="StreamTexture" id=11]
+flags = 4
+load_path = "res://.import/tr-b.png-fec13a63181bd954812fb4c805056d70.stex"
+
+[sub_resource type="StreamTexture" id=12]
+flags = 4
+load_path = "res://.import/tavern.png-cf9f808f575fa29952b62cdc95ac2930.stex"
 
 [sub_resource type="Theme" id=2]
 resource_local_to_scene = true
@@ -192,22 +224,22 @@ margin_right = 1498.0
 margin_bottom = 194.0
 
 [node name="Entrances" type="VSplitContainer" parent="Container/Margin/HSplitContainer"]
-margin_right = 1100.0
+margin_right = 1148.0
 margin_bottom = 192.0
 
 [node name="Dungeons" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances"]
-margin_right = 1100.0
+margin_right = 1148.0
 margin_bottom = 44.0
 
 [node name="Rows" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Dungeons"]
-margin_right = 1100.0
+margin_right = 1148.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 2
 
 [node name="1" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows"]
-margin_right = 1100.0
+margin_right = 1148.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -264,25 +296,23 @@ texture_normal = ExtResource( 52 )
 connector = "ep"
 line_color = Color( 1, 1, 1, 1 )
 
-[node name="DPW" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-modulate = Color( 1, 0, 0, 1 )
+[node name="DPM" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
 margin_bottom = 44.0
-texture_normal = ExtResource( 53 )
+texture_normal = SubResource( 13 )
 connector = "dp"
-line_color = Color( 1, 1, 1, 1 )
 
-[node name="DPS" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
+[node name="DPW" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 modulate = Color( 1, 0, 0, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
 margin_bottom = 44.0
-texture_normal = ExtResource( 54 )
+texture_normal = ExtResource( 53 )
 connector = "dp"
 line_color = Color( 1, 1, 1, 1 )
 
@@ -297,16 +327,14 @@ texture_normal = ExtResource( 55 )
 connector = "dp"
 line_color = Color( 1, 1, 1, 1 )
 
-[node name="DPN" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-modulate = Color( 1, 0, 0, 1 )
+[node name="DPB" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 384.0
 margin_right = 428.0
 margin_bottom = 44.0
-texture_normal = ExtResource( 56 )
+texture_normal = SubResource( 9 )
 connector = "dp"
-line_color = Color( 1, 1, 1, 1 )
 
 [node name="TH" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 modulate = Color( 1, 0.556863, 0.839216, 1 )
@@ -352,23 +380,54 @@ texture_normal = ExtResource( 60 )
 connector = "sp"
 line_color = Color( 1, 1, 1, 1 )
 
-[node name="SW" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-modulate = Color( 0.419608, 0.831373, 0.419608, 1 )
+[node name="SWBC" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 624.0
 margin_right = 668.0
 margin_bottom = 44.0
-texture_normal = ExtResource( 61 )
+texture_normal = SubResource( 6 )
+connector = "sw"
+line_color = Color( 0.419608, 0.831373, 0.419608, 1 )
+
+[node name="SWW" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
+modulate = Color( 0.419608, 0.831373, 0.419608, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 672.0
+margin_right = 716.0
+margin_bottom = 44.0
+texture_normal = SubResource( 5 )
 connector = "sw"
 line_color = Color( 1, 1, 1, 1 )
+
+[node name="SWE" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
+modulate = Color( 0.419608, 0.831373, 0.419608, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 720.0
+margin_right = 764.0
+margin_bottom = 44.0
+texture_normal = SubResource( 7 )
+connector = "sw"
+line_color = Color( 1, 1, 1, 1 )
+
+[node name="SWB" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_right = 812.0
+margin_bottom = 44.0
+texture_normal = SubResource( 8 )
+connector = "sw"
+line_color = Color( 0.419608, 0.831373, 0.419608, 1 )
 
 [node name="TT" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 modulate = Color( 1, 0, 1, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 672.0
-margin_right = 716.0
+margin_left = 816.0
+margin_right = 860.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 62 )
 connector = "tt"
@@ -378,8 +437,8 @@ line_color = Color( 1, 1, 1, 1 )
 modulate = Color( 0.392157, 0.65098, 0.929412, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 720.0
-margin_right = 764.0
+margin_left = 864.0
+margin_right = 908.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 63 )
 connector = "ip"
@@ -389,32 +448,31 @@ line_color = Color( 1, 1, 1, 1 )
 modulate = Color( 0, 1, 0, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 768.0
-margin_right = 812.0
+margin_left = 912.0
+margin_right = 956.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 64 )
 connector = "mm"
 line_color = Color( 1, 1, 1, 1 )
 
+[node name="TRM" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 960.0
+margin_right = 1004.0
+margin_bottom = 44.0
+texture_normal = SubResource( 10 )
+connector = "tr"
+line_color = Color( 1, 0.894118, 0.768627, 1 )
+
 [node name="TRW" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 modulate = Color( 1, 0.894118, 0.768627, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 816.0
-margin_right = 860.0
+margin_left = 1008.0
+margin_right = 1052.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 65 )
-connector = "tr"
-line_color = Color( 1, 1, 1, 1 )
-
-[node name="TRS" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-modulate = Color( 1, 0.894118, 0.768627, 1 )
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 864.0
-margin_right = 908.0
-margin_bottom = 44.0
-texture_normal = ExtResource( 66 )
 connector = "tr"
 line_color = Color( 1, 1, 1, 1 )
 
@@ -422,47 +480,26 @@ line_color = Color( 1, 1, 1, 1 )
 modulate = Color( 1, 0.894118, 0.768627, 1 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 912.0
-margin_right = 956.0
+margin_left = 1056.0
+margin_right = 1100.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 67 )
 connector = "tr"
 line_color = Color( 1, 1, 1, 1 )
 
-[node name="TRN" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-modulate = Color( 1, 0.894118, 0.768627, 1 )
+[node name="TRB" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 960.0
-margin_right = 1004.0
+margin_left = 1104.0
+margin_right = 1148.0
 margin_bottom = 44.0
-texture_normal = ExtResource( 30 )
+texture_normal = SubResource( 11 )
 connector = "tr"
-line_color = Color( 1, 1, 1, 1 )
-
-[node name="GT" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-modulate = Color( 0.501961, 0, 0, 1 )
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1008.0
-margin_right = 1052.0
-margin_bottom = 44.0
-texture_normal = ExtResource( 31 )
-connector = "gt"
-line_color = Color( 1, 1, 1, 1 )
-
-[node name="Ganon" parent="Container/Margin/HSplitContainer/Entrances/Dungeons/Rows/1" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1056.0
-margin_right = 1100.0
-margin_bottom = 44.0
-texture_normal = ExtResource( 32 )
-connector = "ganon"
+line_color = Color( 1, 0.894118, 0.768627, 1 )
 
 [node name="Entrances" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances"]
 margin_top = 56.0
-margin_right = 1100.0
+margin_right = 1148.0
 margin_bottom = 192.0
 
 [node name="Connectors" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
@@ -910,6 +947,15 @@ margin_bottom = 44.0
 texture_normal = ExtResource( 95 )
 connector = "kings_tomb"
 
+[node name="Tavern" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Item Caves/4" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 336.0
+margin_right = 380.0
+margin_bottom = 44.0
+texture_normal = SubResource( 12 )
+connector = "tavern"
+
 [node name="Special Entrances" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
 margin_left = 720.0
 margin_right = 828.0
@@ -986,20 +1032,23 @@ connector = "big_bomb"
 [node name="ShopCounter" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Special Entrances/4" instance=ExtResource( 83 )]
 margin_left = 48.0
 margin_right = 108.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 9
 icon = ExtResource( 104 )
 locked_total_checks = true
 
 [node name="Items" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
 margin_left = 832.0
-margin_right = 1068.0
+margin_right = 1116.0
 margin_bottom = 136.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_constants/separation = 2
 
 [node name="2" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items"]
-margin_right = 236.0
+margin_right = 284.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1047,9 +1096,20 @@ margin_bottom = 44.0
 texture_normal = ExtResource( 43 )
 connector = "powder"
 
+[node name="GT" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items/2" instance=ExtResource( 1 )]
+modulate = Color( 0.501961, 0, 0, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_right = 284.0
+margin_bottom = 44.0
+texture_normal = ExtResource( 31 )
+connector = "gt"
+line_color = Color( 1, 1, 1, 1 )
+
 [node name="3" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items"]
 margin_top = 46.0
-margin_right = 236.0
+margin_right = 284.0
 margin_bottom = 90.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1098,9 +1158,18 @@ margin_bottom = 44.0
 texture_normal = ExtResource( 33 )
 connector = "big_key"
 
+[node name="Ganon" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items/3" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_right = 284.0
+margin_bottom = 44.0
+texture_normal = ExtResource( 32 )
+connector = "ganon"
+
 [node name="4" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items"]
 margin_top = 92.0
-margin_right = 236.0
+margin_right = 284.0
 margin_bottom = 136.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1173,6 +1242,9 @@ script = ExtResource( 70 )
 modulate = Color( 0.627451, 0.25098, 0.905882, 1 )
 margin_left = 51.0
 margin_right = 111.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 6
 icon = ExtResource( 52 )
 
@@ -1180,6 +1252,9 @@ icon = ExtResource( 52 )
 modulate = Color( 1, 0, 0, 1 )
 margin_left = 118.0
 margin_right = 178.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 6
 icon = ExtResource( 82 )
 
@@ -1187,6 +1262,9 @@ icon = ExtResource( 82 )
 modulate = Color( 1, 0.556863, 0.839216, 1 )
 margin_left = 185.0
 margin_right = 245.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 6
 icon = ExtResource( 57 )
 
@@ -1194,6 +1272,9 @@ icon = ExtResource( 57 )
 modulate = Color( 1, 0.647059, 0, 1 )
 margin_left = 252.0
 margin_right = 312.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 2
 icon = ExtResource( 58 )
 
@@ -1215,6 +1296,9 @@ script = ExtResource( 72 )
 
 [node name="PD" parent="Container/Margin/HSplitContainer/NotesButtons/2" instance=ExtResource( 83 )]
 modulate = Color( 1, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 14
 icon = ExtResource( 59 )
 
@@ -1222,6 +1306,9 @@ icon = ExtResource( 59 )
 modulate = Color( 0.105882, 0.937255, 1, 1 )
 margin_left = 67.0
 margin_right = 127.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 10
 icon = ExtResource( 60 )
 
@@ -1229,6 +1316,9 @@ icon = ExtResource( 60 )
 modulate = Color( 0.419608, 0.831373, 0.419608, 1 )
 margin_left = 134.0
 margin_right = 194.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 8
 icon = ExtResource( 61 )
 
@@ -1236,6 +1326,9 @@ icon = ExtResource( 61 )
 modulate = Color( 1, 0, 1, 1 )
 margin_left = 201.0
 margin_right = 261.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 8
 icon = ExtResource( 62 )
 
@@ -1248,6 +1341,9 @@ custom_constants/separation = 7
 
 [node name="HC" parent="Container/Margin/HSplitContainer/NotesButtons/3" instance=ExtResource( 83 )]
 modulate = Color( 0.678431, 0.380392, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 8
 icon = ExtResource( 68 )
 
@@ -1255,6 +1351,9 @@ icon = ExtResource( 68 )
 modulate = Color( 0.392157, 0.65098, 0.929412, 1 )
 margin_left = 67.0
 margin_right = 127.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 8
 icon = ExtResource( 63 )
 
@@ -1262,6 +1361,9 @@ icon = ExtResource( 63 )
 modulate = Color( 0, 1, 0, 1 )
 margin_left = 134.0
 margin_right = 194.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 8
 icon = ExtResource( 64 )
 
@@ -1269,6 +1371,9 @@ icon = ExtResource( 64 )
 modulate = Color( 1, 0.894118, 0.768627, 1 )
 margin_left = 201.0
 margin_right = 261.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 12
 icon = ExtResource( 81 )
 
@@ -1276,6 +1381,9 @@ icon = ExtResource( 81 )
 modulate = Color( 0.501961, 0, 0, 1 )
 margin_left = 268.0
 margin_right = 328.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 total_checks = 27
 icon = ExtResource( 31 )
 

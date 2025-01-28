@@ -14,9 +14,6 @@ button_mask = 7
 enabled_focus_mode = 0
 texture_normal = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="StatusButton" type="TextureButton" parent="."]
 margin_right = 44.0
