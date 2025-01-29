@@ -22,7 +22,8 @@ signal dungeon_clicked(node)
 signal current_checks_changed(_value)
 # warning-ignore:unused_signal
 signal total_checks_changed(_value)
-
+# warning-ignore:unused_signal
+signal move_doors_notes()
 # warning-ignore:unused_signal
 signal start_autotracking()
 # warning-ignore:unused_signal
@@ -35,3 +36,5 @@ signal set_selected_device(device)
 signal set_connected_device(device)
 # warning-ignore:unused_signal
 signal refresh_devices()
+# warning-ignore:unused_signal
+signal open_menu()

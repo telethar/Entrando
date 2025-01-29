@@ -16,6 +16,7 @@ func _ready() -> void:
 	Events.connect("marker_clicked", self, "generate_marker")
 	Events.connect("save_file_clicked", self, "open_save_dialog")
 	Events.connect("load_file_clicked", self, "open_load_dialog")
+	Events.connect("move_doors_notes", self, "_move_doors_notes")
 	Events.emit_signal("start_autotracking")
 
 	set_window_size()
@@ -132,3 +133,14 @@ func save_window_size() -> void:
 	save_file.store_string(to_json(data))
 	save_file.close()
 
+func _move_doors_notes() -> void:
+	if $NotesWindow.rect_position.x > 1000:
+		$GUILayer/GUI.rect_position = Vector2(350, 0)
+		$LightWorld.position = Vector2(350, 0) 
+		$DarkWorld.position = Vector2(1100, 0)
+		$NotesWindow.rect_position = Vector2(0, 0)
+	else:
+		$GUILayer/GUI.rect_position = Vector2(0, 0)
+		$LightWorld.position = Vector2(0, 0) 
+		$DarkWorld.position = Vector2(750, 0)
+		$NotesWindow.rect_position = Vector2(1500, 0)

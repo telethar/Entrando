@@ -2,12 +2,11 @@ extends MarginContainer
 
 var text: String
 var current_checks: int setget set_current_checks
+var isSelected : bool
 export var total_checks: int setget set_total_checks
 export var icon: Texture
 export var locked_total_checks: bool
 export var color: Color
-
-var notes_tab: HSplitContainer
 
 onready var label = $Label
 
@@ -42,7 +41,7 @@ func save_data() -> Dictionary:
 	var data = {
 		"current_checks": current_checks,
 		"total_checks": total_checks,
-		"notes": notes_tab.text,
+		"notes": text,
 		"paths": []
 	}
 
@@ -50,33 +49,44 @@ func save_data() -> Dictionary:
 
 func load_data(data: Dictionary) -> void:
 	current_checks = data.current_checks
-	notes_tab.current_slider.value = current_checks
+	#notes_tab.current_slider.value = current_checks
 	total_checks = data.total_checks
-	notes_tab.total_slider.value = total_checks
-	notes_tab.text = data.notes
+	#notes_tab.total_slider.value = total_checks
+	#notes_tab.text = data.notes
 	update_label()
 	
-func selected(isSelected: bool) -> void:
+func selected(_isSelected: bool) -> void:
+	isSelected = _isSelected
 	$ColorRect.visible = isSelected
+	if current_checks == total_checks:
+		$ColorRect.color = Color("b0c23d19") #red
+		$ColorRect.visible = true
+	if isSelected:
+		$ColorRect.color = Color("b064e60c") #green
+		$ColorRect.visible = true
+	
 	
 func update_label() -> void:
 	label.text = "%d/%d" % [current_checks, total_checks]
+	if current_checks == total_checks and not isSelected:
+		$ColorRect.color = Color("b0c23d19")
+		$ColorRect.visible = true
+	elif not isSelected:
+		$ColorRect.visible = false
 
 func set_current_checks(value: int) -> void:
 	current_checks = value
 	if label:
 		update_label()
-	if $ColorRect.visible:
+	if isSelected:
 		Events.emit_signal("current_checks_changed", current_checks)
 
 func set_total_checks(value: int) -> void:
 	if !locked_total_checks:
 		total_checks = value
-		if notes_tab:
-			notes_tab.total_slider.value = total_checks
 	if label:
 		update_label()
-	if $ColorRect.visible:
+	if isSelected:
 		Events.emit_signal("total_checks_changed", total_checks)
 
 func _current_checks_changed(value: int) -> void:

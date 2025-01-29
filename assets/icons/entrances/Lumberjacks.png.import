@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Uncle.png-6ea650018d354fde35d59daa17e91331.stex"
+path="res://.import/Lumberjacks.png-43b208bd20aa48a40a5a0114395aadfb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/items/Uncle.png"
-dest_files=[ "res://.import/Uncle.png-6ea650018d354fde35d59daa17e91331.stex" ]
+source_file="res://assets/icons/entrances/Lumberjacks.png"
+dest_files=[ "res://.import/Lumberjacks.png-43b208bd20aa48a40a5a0114395aadfb.stex" ]
 
 [params]
 

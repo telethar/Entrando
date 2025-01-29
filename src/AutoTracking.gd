@@ -5,7 +5,7 @@ const TODO_TEXTURE = preload("res://assets/icons/todo.png");
 
 # The URL we will connect to
 export var websocket_url = "ws://localhost:"
-export var websocket_port = 8080
+export var websocket_port = 23074
 export var device_name = ""
 
 # Our WebSocketClient instance
@@ -78,8 +78,8 @@ var locations_to_sram = {
 	"Stumpy": [[0x410, 0x08]],
 	"Well": [[0x05E, 0xF0], [0x05F, 0x01]],
 	"Uncle": [[0x3C6, 0x01], [0x0AA, 0x10]],
-	"hideout": [[0x1C3, 0x02]],
-	"lumberjacks": [[0x1C5, 0x02]],
+	"Hideout": [[0x1C3, 0x02]],
+	"Lumberjacks": [[0x1C5, 0x02]],
 }
 
 enum AUTOTRACKER_STATUS {
@@ -92,7 +92,7 @@ enum AUTOTRACKER_STATUS {
 
 var _at_status = AUTOTRACKER_STATUS.DISCONNECTED
 
-onready var status_label = $"/root/Tracker/GUILayer/GUI/Container/Margin/HSplitContainer/NotesButtons/VBoxContainer/AutoTrackStatus"
+onready var status_label = $"/root/Tracker/GUILayer/GUI/Container/Margin/HSplitContainer/Entrances/Dungeons/VBoxContainer/AutoTrackStatus"
 
 
 func _ready() -> void:

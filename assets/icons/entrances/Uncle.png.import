@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Well.png-a6ab15c3b8e6baf4e719583bbcb19fcc.stex"
+path="res://.import/Uncle.png-dcf51d3d06d03b1891b32a863ad02d92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/items/Well.png"
-dest_files=[ "res://.import/Well.png-a6ab15c3b8e6baf4e719583bbcb19fcc.stex" ]
+source_file="res://assets/icons/entrances/Uncle.png"
+dest_files=[ "res://.import/Uncle.png-dcf51d3d06d03b1891b32a863ad02d92.stex" ]
 
 [params]
 

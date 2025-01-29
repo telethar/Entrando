@@ -56,7 +56,7 @@ margin_bottom = 238.0
 theme = ExtResource( 2 )
 min_value = 1.0
 max_value = 65563.0
-value = 8080.0
+value = 23074.0
 rounded = true
 
 [node name="RefreshDevices" type="Button" parent="."]

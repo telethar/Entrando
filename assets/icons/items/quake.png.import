@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lumberjacks.png-2e318e8149e08cb67ce0795f0a133e32.stex"
+path="res://.import/quake.png-5861196a979485d3dcec27e5aad3235e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/items/Lumberjacks.png"
-dest_files=[ "res://.import/Lumberjacks.png-2e318e8149e08cb67ce0795f0a133e32.stex" ]
+source_file="res://assets/icons/items/quake.png"
+dest_files=[ "res://.import/quake.png-5861196a979485d3dcec27e5aad3235e.stex" ]
 
 [params]
 

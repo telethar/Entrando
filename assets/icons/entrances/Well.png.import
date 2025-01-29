@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LWHideout.png-2131d84c2042b2617f7c6951ea463ad9.stex"
+path="res://.import/Well.png-419717d99ca74f284993582825bb8b86.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/items/LWHideout.png"
-dest_files=[ "res://.import/LWHideout.png-2131d84c2042b2617f7c6951ea463ad9.stex" ]
+source_file="res://assets/icons/entrances/Well.png"
+dest_files=[ "res://.import/Well.png-419717d99ca74f284993582825bb8b86.stex" ]
 
 [params]
 

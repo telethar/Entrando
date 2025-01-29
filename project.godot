@@ -30,8 +30,9 @@ Util="*res://src/Util.gd"
 
 [display]
 
-window/size/width=1850
+window/size/width=1500
 window/size/height=950
+window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -97,3 +98,4 @@ vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.0784314, 0.0784314, 0.0784314, 1 )
 environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false
