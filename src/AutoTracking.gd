@@ -82,6 +82,22 @@ var locations_to_sram = {
 	"Lumberjacks": [[0x1C5, 0x02]],
 }
 
+var dungeons_masks = {
+	"hc": [[0xC0][1]],
+	"ep": [[0x20][1]],
+	"dp": [[0x10][1]],
+	"th": [[0x20][0]],
+	"at": [[0x08][1]],
+	"pd": [[0x02][1]],
+	"sp": [[0x04][1]],
+	"sw": [[0x80][0]],
+	"tt": [[0x10][0]],
+	"ip": [[0x40][0]],
+	"mm": [[0x01][1]],
+	"tr": [[0x08][0]],
+	"gt": [[0x04][0]],
+}
+
 enum AUTOTRACKER_STATUS {
 	DISCONNECTED,
 	CONNECTING,
@@ -200,8 +216,9 @@ func _on_data():
 func get_location_data():
 	 _client.disconnect("data_received", self, "_on_data")
 	 _client.connect("data_received", self, "_build_location_data")
-	 read_snes_mem(SAVEDATA_START, 0x400)
+	 read_snes_mem(SAVEDATA_START, 0x409)
 	 read_snes_mem(SAVEDATA_START + 0x410, 2)
+	 read_snes_mem(0xF58000, 30)
 
 func process_location_data():
 	if _old_location_data == null:
@@ -241,7 +258,13 @@ func process_location_data():
 				overworld_node.get_child(0).hide()
 				# Do this to allow ctrl-z to undo
 				Util.add_hidden(overworld_node.get_child(0))
-
+	
+	#Autotrack dungeon item counts and key counts when in dungeon
+	if _location_data.size() > 0x412:
+		var dungeon_item_count_seen = [[_location_data[0x403]], [_location_data[0x404]]]
+		for dun in dungeons_masks:
+			if dungeon_item_count_seen[dun[1]] & dun[0]:
+			
 	_old_location_data = _location_data
 	_location_data = null
 	_timer.paused = false
@@ -261,7 +284,9 @@ func _build_location_data():
 		return
 	else:
 		_location_data = _location_data + res_raw
-	if _location_data.size() == 0x410 + 2:
+	#if _location_data.size() == 0x410 + 2:
+		
+	if _location_data.size() > 0x412:
 		_client.disconnect("data_received", self, "_build_location_data")
 		_client.connect("data_received", self, "_on_data")
 		process_location_data()
