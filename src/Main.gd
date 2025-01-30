@@ -112,22 +112,22 @@ func generate_marker(texture: Texture, color: Color, connector: String) -> void:
     marker.set_sprite(texture)
 
 func set_window_size() -> void:
-	var save_file = File.new()
-	var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
-	if !save_file.file_exists(path) or save_file.open(path, File.READ) != OK:
-		return
-	var data = parse_json(save_file.get_as_text())
-	OS.window_size = str2var("Vector2" + data.size)
-	OS.window_position = str2var("Vector2" + data.screen)
+    var save_file = File.new()
+    var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
+    if !save_file.file_exists(path) or save_file.open(path, File.READ) != OK:
+        return
+    var data = parse_json(save_file.get_as_text())
+    OS.window_size = str2var("Vector2" + data.size)
+    OS.window_position = str2var("Vector2" + data.screen)
 
 func save_window_size() -> void:
-	var data = {    
-		"size": OS.window_size,
-		"screen": OS.window_position
-	}
-	var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
-	var save_file = File.new()
-	if save_file.open(path, File.WRITE) != OK:
-		return
-	save_file.store_string(to_json(data))
-	save_file.close()
+    var data = {    
+        "size": OS.window_size,
+        "screen": OS.window_position
+    }
+    var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
+    var save_file = File.new()
+    if save_file.open(path, File.WRITE) != OK:
+        return
+    save_file.store_string(to_json(data))
+    save_file.close()

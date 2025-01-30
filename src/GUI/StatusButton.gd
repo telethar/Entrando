@@ -1,9 +1,5 @@
 extends TextureButton
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 const DISABLED_TEXTURE = preload("res://assets/icons/disabled.png");
 const TODO_TEXTURE = preload("res://assets/icons/todo.png");
 
@@ -12,9 +8,6 @@ func _ready() -> void:
     connect("mouse_entered", self, "_on_mouse_entered")
     connect("mouse_exited", self, "_on_mouse_exited")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 func _gui_input(event: InputEvent) -> void:
     if event is InputEventMouseButton \
         and event.is_pressed():
