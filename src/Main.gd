@@ -122,6 +122,8 @@ func set_window_size() -> void:
 	OS.window_position = str2var("Vector2" + data.screen)
 
 func save_window_size() -> void:
+	if $"/root".get_viewport().size.x > 1600:
+		OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
 	var data = {    
 		"size": OS.window_size,
 		"screen": OS.window_position

@@ -232,9 +232,9 @@ func process_location_data():
 				underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
 				underworld_node.get_child(0).set_pressed(true)
 			else:
-				var overworld_node = lightworld.find_node(loc)
+				var overworld_node = lightworld.find_node("*" + loc + "*")
 				if (overworld_node == null):
-					overworld_node = darkworld.find_node(loc)
+					overworld_node = darkworld.find_node("*" + loc + "*")
 					if (overworld_node == null):
 						print("Error Autotracking: Unable to find node " + loc)
 						continue

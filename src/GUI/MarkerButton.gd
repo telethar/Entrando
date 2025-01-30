@@ -97,15 +97,20 @@ export(String,
 	"hype cave",
 	"blinds house",
 	"mimic cave",
-	"tavern"
+	"tavern",
+	"shop"
 ) var connector
 export(Color) var line_color: Color = Color.red
 var is_hovering: bool = false
+
+onready var count_label = $Label
+onready var count = 0
 
 func _ready() -> void:
 	connect("button_down", self, "_on_pressed")
 	connect("mouse_entered", self, "_on_mouse_entered")
 	connect("mouse_exited", self, "_on_mouse_exited")
+	count_label.text = "%d" % [count]
 
 func _draw() -> void:
 	if connector == "":
@@ -137,3 +142,21 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	is_hovering = false
 	update()
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+		and event.is_pressed():
+		match(event.button_index):
+			BUTTON_WHEEL_UP:
+				set_count(count + 1)
+			BUTTON_WHEEL_DOWN:
+				if count >= 0:
+					set_count(count - 1)
+
+func set_count(new_count: int) -> void:
+	count = new_count
+	if count >= 0:
+		count_label.visible = true
+	else:
+		count_label.visible = false
+	count_label.text = "%d" % [count]

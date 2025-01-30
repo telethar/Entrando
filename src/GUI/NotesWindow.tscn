@@ -1,21 +1,48 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://assets/icons/dungeons/at.png" type="Texture" id=1]
 [ext_resource path="res://assets/font/Ubuntu-16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/icons/dungeons/sw.png" type="Texture" id=3]
-[ext_resource path="res://assets/icons/dungeons/th.png" type="Texture" id=4]
 [ext_resource path="res://assets/icons/dungeons/hc.png" type="Texture" id=5]
 [ext_resource path="res://assets/icons/dungeons/tr.png" type="Texture" id=6]
-[ext_resource path="res://assets/icons/dungeons/ep.png" type="Texture" id=7]
 [ext_resource path="res://assets/icons/dungeons/dp.png" type="Texture" id=8]
-[ext_resource path="res://assets/icons/dungeons/sp.png" type="Texture" id=9]
-[ext_resource path="res://assets/icons/dungeons/ip.png" type="Texture" id=10]
-[ext_resource path="res://assets/icons/dungeons/pd.png" type="Texture" id=11]
-[ext_resource path="res://assets/icons/dungeons/tt.png" type="Texture" id=12]
-[ext_resource path="res://assets/icons/dungeons/mm.png" type="Texture" id=13]
-[ext_resource path="res://assets/icons/dungeons/gt.png" type="Texture" id=14]
 [ext_resource path="res://src/GUI/NotesWindow.gd" type="Script" id=15]
 [ext_resource path="res://src/GUI/DoorsButton.tscn" type="PackedScene" id=16]
+
+[sub_resource type="StreamTexture" id=32]
+flags = 4
+load_path = "res://.import/ep_color.png-a1c72b519a19b7845533ef1ef41b7349.stex"
+
+[sub_resource type="StreamTexture" id=35]
+flags = 4
+load_path = "res://.import/th_color.png-a06ab45725f9a2c4b9d0ce116b491b4f.stex"
+
+[sub_resource type="StreamTexture" id=36]
+flags = 4
+load_path = "res://.import/at_color.png-46e7443ab16a357a9c8398aab8eb96c3.stex"
+
+[sub_resource type="StreamTexture" id=37]
+flags = 4
+load_path = "res://.import/pd_color.png-7409530162f77ddfa33c8d2adbfa3678.stex"
+
+[sub_resource type="StreamTexture" id=38]
+flags = 4
+load_path = "res://.import/sp_color.png-ebd1a93e26aadcb254e1cece0677ce97.stex"
+
+[sub_resource type="StreamTexture" id=39]
+flags = 4
+load_path = "res://.import/tt_color.png-888291bd922da4fedeafdfb7a86cbe71.stex"
+
+[sub_resource type="StreamTexture" id=40]
+flags = 4
+load_path = "res://.import/ip_color.png-c37b6fda0fef2546f484a3a196f37ecc.stex"
+
+[sub_resource type="StreamTexture" id=41]
+flags = 4
+load_path = "res://.import/mm_color.png-cb41d5ae3842165bad84a2040b622b39.stex"
+
+[sub_resource type="StreamTexture" id=44]
+flags = 4
+load_path = "res://.import/gt_color.png-f41f4da21357167bfa81f66151f95d8f.stex"
 
 [node name="NotesWindow" type="HSplitContainer"]
 anchor_right = 1.0
@@ -24,7 +51,7 @@ margin_right = -1498.0
 script = ExtResource( 15 )
 
 [node name="NotesMargin" type="MarginContainer" parent="."]
-margin_right = 352.0
+margin_right = 328.0
 margin_bottom = 950.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -36,19 +63,19 @@ custom_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="NotesMargin"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 348.0
+margin_right = 324.0
 margin_bottom = 942.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="NotesLabel" type="Label" parent="NotesMargin/VBoxContainer"]
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 14.0
 text = "Notes:"
 
 [node name="NotesEdit" type="TextEdit" parent="NotesMargin/VBoxContainer"]
 margin_top = 18.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 732.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -64,14 +91,14 @@ __meta__ = {
 
 [node name="ChecksLabel" type="Label" parent="NotesMargin/VBoxContainer"]
 margin_top = 736.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 750.0
 size_flags_horizontal = 3
 text = "Checks:"
 
 [node name="Current" type="HBoxContainer" parent="NotesMargin/VBoxContainer"]
 margin_top = 754.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 770.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -86,7 +113,7 @@ text = "0"
 
 [node name="Slider" type="HSlider" parent="NotesMargin/VBoxContainer/Current"]
 margin_left = 28.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 40.0
@@ -96,7 +123,7 @@ ticks_on_borders = true
 
 [node name="Total" type="HBoxContainer" parent="NotesMargin/VBoxContainer"]
 margin_top = 774.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 790.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -111,7 +138,7 @@ text = "0"
 
 [node name="Slider" type="HSlider" parent="NotesMargin/VBoxContainer/Total"]
 margin_left = 28.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 40.0
@@ -121,11 +148,11 @@ ticks_on_borders = true
 
 [node name="Dungeons" type="VBoxContainer" parent="NotesMargin/VBoxContainer"]
 margin_top = 794.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 934.0
 
 [node name="LWDungeons" type="HBoxContainer" parent="NotesMargin/VBoxContainer/Dungeons"]
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 44.0
 
 [node name="HC" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
@@ -137,7 +164,7 @@ color = Color( 1, 1, 1, 1 )
 margin_left = 64.0
 margin_right = 124.0
 total_checks = 6
-icon = ExtResource( 7 )
+icon = SubResource( 32 )
 color = Color( 0.627451, 0.25098, 0.905882, 1 )
 
 [node name="DP" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
@@ -151,31 +178,31 @@ color = Color( 1, 0, 0, 1 )
 margin_left = 192.0
 margin_right = 252.0
 total_checks = 6
-icon = ExtResource( 4 )
+icon = SubResource( 35 )
 color = Color( 1, 0.556863, 0.839216, 1 )
 
 [node name="CT" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
 margin_left = 256.0
 margin_right = 316.0
 total_checks = 2
-icon = ExtResource( 1 )
+icon = SubResource( 36 )
 color = Color( 1, 0.647059, 0, 1 )
 
 [node name="DWDungeons1" type="HBoxContainer" parent="NotesMargin/VBoxContainer/Dungeons"]
 margin_top = 48.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 92.0
 
 [node name="PD" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
 total_checks = 14
-icon = ExtResource( 11 )
+icon = SubResource( 37 )
 color = Color( 1, 1, 0, 1 )
 
 [node name="SP" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
 margin_left = 64.0
 margin_right = 124.0
 total_checks = 10
-icon = ExtResource( 9 )
+icon = SubResource( 38 )
 color = Color( 0.105882, 0.937255, 1, 1 )
 
 [node name="SW" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
@@ -189,24 +216,24 @@ color = Color( 0.419608, 0.831373, 0.419608, 1 )
 margin_left = 192.0
 margin_right = 252.0
 total_checks = 8
-icon = ExtResource( 12 )
+icon = SubResource( 39 )
 color = Color( 1, 0, 1, 1 )
 
 [node name="DWDungeons2" type="HBoxContainer" parent="NotesMargin/VBoxContainer/Dungeons"]
 margin_top = 96.0
-margin_right = 340.0
+margin_right = 316.0
 margin_bottom = 140.0
 
 [node name="IP" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
 total_checks = 8
-icon = ExtResource( 10 )
+icon = SubResource( 40 )
 color = Color( 0.392157, 0.65098, 0.929412, 1 )
 
 [node name="MM" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
 margin_left = 64.0
 margin_right = 124.0
 total_checks = 8
-icon = ExtResource( 13 )
+icon = SubResource( 41 )
 color = Color( 0, 1, 0, 1 )
 
 [node name="TR" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
@@ -220,5 +247,5 @@ color = Color( 1, 0.894118, 0.768627, 1 )
 margin_left = 192.0
 margin_right = 252.0
 total_checks = 27
-icon = ExtResource( 14 )
+icon = SubResource( 44 )
 color = Color( 0.501961, 0, 0, 1 )
