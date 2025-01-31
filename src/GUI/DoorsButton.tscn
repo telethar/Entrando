@@ -15,7 +15,15 @@ script = ExtResource( 3 )
 visible = false
 margin_right = 60.0
 margin_bottom = 44.0
-color = Color( 0.392157, 0.901961, 0.0470588, 0.690196 )
+color = Color( 0.760784, 0.239216, 0.0980392, 0.690196 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+margin_right = 60.0
+margin_bottom = 44.0
+border_color = Color( 1, 0.631373, 0, 1 )
+border_width = 3.9
+editor_only = false
 
 [node name="Texture" type="TextureRect" parent="."]
 margin_right = 60.0

@@ -14,6 +14,7 @@ onready var label = $Label
 onready var key_label = $KeyLabel
 
 func _ready() -> void:
+    total_keys = -1
     update_label()
     update_key_label()
     #add_to_group(Util.GROUP_NOTES)
@@ -62,30 +63,27 @@ func load_data(data: Dictionary) -> void:
     
 func selected(_isSelected: bool) -> void:
     isSelected = _isSelected
-    $ColorRect.visible = isSelected
-    if current_checks == total_checks:
-        $ColorRect.color = Color("b0c23d19") #red
-        $ColorRect.visible = true
-    if isSelected:
-        $ColorRect.color = Color("b064e60c") #green
-        $ColorRect.visible = true
+    $ReferenceRect.visible = isSelected
     
     
 func update_label() -> void:
     label.text = "%d/%d" % [current_checks, total_checks]
-    if current_checks == total_checks and not isSelected:
-        $ColorRect.color = Color("b0c23d19")
+    if current_checks == total_checks:
+        $ColorRect.color = Color("b0c23d19") #red
         $ColorRect.visible = true
-    elif not isSelected:
+    else:
         $ColorRect.visible = false
     $"/root/Tracker/NotesWindow/NotesMargin/VBoxContainer/NotesEdit".grab_focus()
         
 func update_key_label() -> void:
-    key_label.text = "%d\n%d" % [current_keys, total_keys]
-    if current_keys == total_keys:
-        key_label.modulate = Color("008000")
+    if total_keys == -1:
+        key_label.text = "%d" % [current_keys]
     else:
-        key_label.modulate = Color("f8d038")
+        key_label.text = "%d\n%d" % [current_keys, total_keys]
+    if current_keys == total_keys:
+        key_label.modulate = Color("008000") #green
+    else:
+        key_label.modulate = Color("f8d038") #yellow
 
 func set_current_checks(value: int) -> void:
     current_checks = value

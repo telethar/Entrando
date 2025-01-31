@@ -216,11 +216,13 @@ func _on_data():
             get_location_data()
 
 func get_location_data():
-     _client.disconnect("data_received", self, "_on_data")
-     _client.connect("data_received", self, "_build_location_data")
-     read_snes_mem(SAVEDATA_START, 0x500)
-     #read_snes_mem(SAVEDATA_START + 0x410, 2)
-     read_snes_mem(0xF65410, 0x30)
+    _client.disconnect("data_received", self, "_on_data")
+    _client.connect("data_received", self, "_build_location_data")
+    read_snes_mem(SAVEDATA_START, 0x500)
+    #read_snes_mem(SAVEDATA_START + 0x410, 2)
+    read_snes_mem(0xF65410, 0x30)
+    read_snes_mem(0x7FC0, 2)
+    
 
 func process_location_data():
     if _old_location_data == null:
@@ -232,37 +234,36 @@ func process_location_data():
     var lightworld = get_parent().find_node("LightWorld")
     var darkworld = get_parent().find_node("DarkWorld")
 
-    if _location_data.size() < 0x501:
-        for loc in locations_to_sram:
-            var locs_data = locations_to_sram[loc]
-            var all_locs_checked = true            
-            var any_locs_checked  = false
-            var was_any_change = false
-            for loc_data in locs_data:
-                var addr = loc_data[0]
-                var mask = loc_data[1]
-                var new_value = _location_data[addr] & mask
-                var old_value = _old_location_data[addr] & mask
-                was_any_change = was_any_change || (new_value != old_value)
-                any_locs_checked = any_locs_checked || (new_value == mask)
-                all_locs_checked = all_locs_checked && (new_value == mask)
-            if was_any_change and (all_locs_checked or any_locs_checked):
-                var underworld_node = underworld.find_node(loc)
-                if (underworld_node):
-                    underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
-                    underworld_node.get_child(0).set_pressed(true)
-                else:
-                    var overworld_node = lightworld.find_node("*" + loc + "*")
+    for loc in locations_to_sram:
+        var locs_data = locations_to_sram[loc]
+        var all_locs_checked = true            
+        var any_locs_checked  = false
+        var was_any_change = false
+        for loc_data in locs_data:
+            var addr = loc_data[0]
+            var mask = loc_data[1]
+            var new_value = _location_data[addr] & mask
+            var old_value = _old_location_data[addr] & mask
+            was_any_change = was_any_change || (new_value != old_value)
+            any_locs_checked = any_locs_checked || (new_value == mask)
+            all_locs_checked = all_locs_checked && (new_value == mask)
+        if was_any_change and (all_locs_checked or any_locs_checked):
+            var underworld_node = underworld.find_node(loc)
+            if (underworld_node):
+                underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
+                underworld_node.get_child(0).set_pressed(true)
+            else:
+                var overworld_node = lightworld.find_node("*" + loc + "*")
+                if (overworld_node == null):
+                    overworld_node = darkworld.find_node("*" + loc + "*")
                     if (overworld_node == null):
-                        overworld_node = darkworld.find_node("*" + loc + "*")
-                        if (overworld_node == null):
-                            print("Error Autotracking: Unable to find node " + loc)
-                            continue
-                    overworld_node.get_child(0).hide()
-                    # Do this to allow ctrl-z to undo
-                    Util.add_hidden(overworld_node.get_child(0))    
-    #Autotrack dungeon item counts and key counts when in dungeon
-    else:
+                        print("Error Autotracking: Unable to find node " + loc)
+                        continue
+                overworld_node.get_child(0).hide()
+                # Do this to allow ctrl-z to undo
+                Util.add_hidden(overworld_node.get_child(0))    
+#Autotrack dungeon item counts and key counts when in dungeon (not in VT)
+    if !(_location_data[0x530] == 86 and _location_data[0x531] == 84):
         var dungeon_item_count_seen = (_location_data[0x403] << 8) + _location_data[0x404]
         var dungeon_key_count_seen = (_location_data[0x474] << 8) + _location_data[0x475]
         var big_key_field = (_location_data[0x366] << 8) + _location_data[0x367]
@@ -300,10 +301,10 @@ func _build_location_data():
         _location_data = _location_data + res_raw
     #if _location_data.size() == 0x410 + 2:
         
-   # if _location_data.size() > 0x412:
-    _client.disconnect("data_received", self, "_build_location_data")
-    _client.connect("data_received", self, "_on_data")
-    process_location_data()
+    if _location_data.size() > 0x530:
+        _client.disconnect("data_received", self, "_build_location_data")
+        _client.connect("data_received", self, "_on_data")
+        process_location_data()
 
 func read_snes_mem(addr, size):
     var read_data = {'Opcode': "GetAddress", 'Space': "SNES", 'Operands': ["%x" % addr, "%x" % size]}

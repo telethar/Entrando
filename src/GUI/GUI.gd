@@ -14,7 +14,8 @@ enum {
     MENU_AUTOTRACKING_SETTINGS = 10,
     # 11 separator
     MENU_TOGGLE_DOORS_NOTES = 12,
-    MENU_MOVE_DOORS_NOTES = 13,
+    MENU_NOTES_ONLY = 13,
+    MENU_MOVE_DOORS_NOTES = 14,
 }
 
 onready var menu = $PopupMenu
@@ -49,6 +50,7 @@ func _ready() -> void:
     menu.add_item("Auto-Tracking Settings", MENU_AUTOTRACKING_SETTINGS)
     menu.add_separator()
     menu.add_item("Toggle Doors Notes", MENU_TOGGLE_DOORS_NOTES)
+    menu.add_item("Toggle Notes Only Mode", MENU_NOTES_ONLY)
 
     tooltip_timer.connect("timeout", self, "_on_tooltip_timeout")
     
@@ -101,13 +103,16 @@ func menu_pressed(id: int) -> void:
         MENU_AUTOTRACKING_SETTINGS:
             autotrack_menu_modal.show()
         MENU_TOGGLE_DOORS_NOTES:
+            #close notes
             if $"/root".get_viewport().size.x > 1600:
                 if ($"/root/Tracker/NotesWindow".rect_position.x < 100):
                     Events.emit_signal("move_doors_notes")
+                    OS.window_position = Vector2(OS.window_position.x + (OS.window_size.x * (350.0/1850.0)), OS.window_position.y)
                 OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
                 get_tree().set_screen_stretch(get_tree().STRETCH_MODE_2D, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
                 $"/root".get_viewport().set_size(Vector2(1500, 950))
                 menu.remove_item(MENU_MOVE_DOORS_NOTES)
+            #open notes
             else:
                 OS.window_size = Vector2(OS.window_size.x * (1850.0/1500.0), OS.window_size.y)
                 get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1850, 950))
@@ -115,7 +120,19 @@ func menu_pressed(id: int) -> void:
                 menu.add_item("Move doors notes to the other side", MENU_MOVE_DOORS_NOTES)
         MENU_MOVE_DOORS_NOTES:
             Events.emit_signal("move_doors_notes")
-
+        MENU_NOTES_ONLY:
+            if $"/root".get_viewport().size.x < 1600:
+                OS.window_size = Vector2(OS.window_size.x * (1850.0/1500.0), OS.window_size.y)
+                get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1850, 950))
+                $"/root".get_viewport().set_size(Vector2(1850, 950))
+            if ($"/root/Tracker/NotesWindow".rect_position.x > 100):
+                Events.emit_signal("move_doors_notes")
+                if !menu.get_item_id(MENU_MOVE_DOORS_NOTES):
+                    menu.add_item("Move doors notes to the other side", MENU_MOVE_DOORS_NOTES)
+            OS.window_size = Vector2(OS.window_size.x * (350.0/$"/root".get_viewport().size.x), OS.window_size.y)
+            get_tree().set_screen_stretch(get_tree().STRETCH_MODE_2D, get_tree().STRETCH_ASPECT_KEEP, Vector2(350, 950))
+            $"/root".get_viewport().set_size(Vector2(350, 950))
+            $"/root/Tracker/NotesWindow/NotesMargin/VBoxContainer/HBoxContainer/Expand".visible = true
 
 func _on_notes_entered(node: Node) -> void:
     if tooltip.visible:

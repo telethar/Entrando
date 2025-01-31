@@ -125,6 +125,8 @@ func set_window_size() -> void:
 func save_window_size() -> void:
     if $"/root".get_viewport().size.x > 1600:
         OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
+    elif $"/root".get_viewport().size.x < 400:
+        OS.window_size = Vector2(OS.window_size.x * (1500.0/350.0), OS.window_size.y)
     var data = {    
         "size": OS.window_size,
         "screen": OS.window_position
@@ -142,8 +144,14 @@ func _move_doors_notes() -> void:
         $LightWorld.position = Vector2(350, 0) 
         $DarkWorld.position = Vector2(1100, 0)
         $NotesWindow.rect_position = Vector2(0, 0)
+        if $"/root/Tracker/Markers":
+            for i in $"/root/Tracker/Markers".get_child_count():
+                $"/root/Tracker/Markers".get_child(i).move_local_x(350)
     else:
         $GUILayer/GUI.rect_position = Vector2(0, 0)
         $LightWorld.position = Vector2(0, 0) 
         $DarkWorld.position = Vector2(750, 0)
         $NotesWindow.rect_position = Vector2(1500, 0)
+        if $"/root/Tracker/Markers":
+            for i in $"/root/Tracker/Markers".get_child_count():
+                $"/root/Tracker/Markers".get_child(i).move_local_x(-350)
