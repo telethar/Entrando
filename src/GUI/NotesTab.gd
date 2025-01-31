@@ -34,7 +34,7 @@ func _total_checks_changed(_value: int) -> void:
     total_label.text = "%d" % total_slider.value
 
 func set_notes_text(value: String) -> void:
-	$"NotesMargin/VBoxContainer/NotesEdit".text = value
+    $"NotesMargin/VBoxContainer/NotesEdit".text = value
 
 func get_notes_text() -> String:
     return $"NotesMargin/VBoxContainer/NotesEdit".text

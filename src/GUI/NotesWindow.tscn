@@ -157,6 +157,7 @@ margin_bottom = 44.0
 
 [node name="HC" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
 total_checks = 8
+total_keys = 1
 icon = ExtResource( 5 )
 color = Color( 1, 1, 1, 1 )
 
@@ -171,6 +172,7 @@ color = Color( 0.627451, 0.25098, 0.905882, 1 )
 margin_left = 128.0
 margin_right = 188.0
 total_checks = 6
+total_keys = 1
 icon = ExtResource( 8 )
 color = Color( 1, 0, 0, 1 )
 
@@ -178,13 +180,15 @@ color = Color( 1, 0, 0, 1 )
 margin_left = 192.0
 margin_right = 252.0
 total_checks = 6
+total_keys = 1
 icon = SubResource( 35 )
 color = Color( 1, 0.556863, 0.839216, 1 )
 
-[node name="CT" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
+[node name="AT" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
 margin_left = 256.0
 margin_right = 316.0
 total_checks = 2
+total_keys = 2
 icon = SubResource( 36 )
 color = Color( 1, 0.647059, 0, 1 )
 
@@ -195,6 +199,7 @@ margin_bottom = 92.0
 
 [node name="PD" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons1" instance=ExtResource( 16 )]
 total_checks = 14
+total_keys = 6
 icon = SubResource( 37 )
 color = Color( 1, 1, 0, 1 )
 
@@ -202,6 +207,7 @@ color = Color( 1, 1, 0, 1 )
 margin_left = 64.0
 margin_right = 124.0
 total_checks = 10
+total_keys = 1
 icon = SubResource( 38 )
 color = Color( 0.105882, 0.937255, 1, 1 )
 
@@ -209,6 +215,7 @@ color = Color( 0.105882, 0.937255, 1, 1 )
 margin_left = 128.0
 margin_right = 188.0
 total_checks = 8
+total_keys = 3
 icon = ExtResource( 3 )
 color = Color( 0.419608, 0.831373, 0.419608, 1 )
 
@@ -216,6 +223,7 @@ color = Color( 0.419608, 0.831373, 0.419608, 1 )
 margin_left = 192.0
 margin_right = 252.0
 total_checks = 8
+total_keys = 1
 icon = SubResource( 39 )
 color = Color( 1, 0, 1, 1 )
 
@@ -226,6 +234,7 @@ margin_bottom = 140.0
 
 [node name="IP" parent="NotesMargin/VBoxContainer/Dungeons/DWDungeons2" instance=ExtResource( 16 )]
 total_checks = 8
+total_keys = 2
 icon = SubResource( 40 )
 color = Color( 0.392157, 0.65098, 0.929412, 1 )
 
@@ -233,6 +242,7 @@ color = Color( 0.392157, 0.65098, 0.929412, 1 )
 margin_left = 64.0
 margin_right = 124.0
 total_checks = 8
+total_keys = 3
 icon = SubResource( 41 )
 color = Color( 0, 1, 0, 1 )
 
@@ -240,6 +250,7 @@ color = Color( 0, 1, 0, 1 )
 margin_left = 128.0
 margin_right = 188.0
 total_checks = 12
+total_keys = 4
 icon = ExtResource( 6 )
 color = Color( 1, 0.894118, 0.768627, 1 )
 
@@ -247,5 +258,6 @@ color = Color( 1, 0.894118, 0.768627, 1 )
 margin_left = 192.0
 margin_right = 252.0
 total_checks = 27
+total_keys = 4
 icon = SubResource( 44 )
 color = Color( 0.501961, 0, 0, 1 )
