@@ -63,12 +63,12 @@ func _selected_current_changed(_value: int) -> void:
     current_slider.value = _value
 
 func set_notes_text(value: String) -> void:
-    $"NotesMargin/VBoxContainer/NotesEdit".text = value
-    $"NotesMargin/VBoxContainer/NotesEdit".cursor_set_line($"NotesMargin/VBoxContainer/NotesEdit".get_line_count())
-    $"NotesMargin/VBoxContainer/NotesEdit".cursor_set_column($"NotesMargin/VBoxContainer/NotesEdit".get_line($"NotesMargin/VBoxContainer/NotesEdit".cursor_get_line()).length())
+    notes.text = value
+    notes.cursor_set_line(notes.get_line_count())
+    notes.cursor_set_column(notes.get_line(notes.cursor_get_line()).length())
     
 func get_notes_text() -> String:
-    return $"NotesMargin/VBoxContainer/NotesEdit".text
+    return notes.text
     
 func _expand_window() -> void:
     OS.window_size = Vector2(OS.window_size.x * (1850.0/350.0), OS.window_size.y)
@@ -77,10 +77,9 @@ func _expand_window() -> void:
     expand_button.visible = false
 
 func _clear_notes() -> void:
-    $"NotesMargin/VBoxContainer/NotesEdit".text = ""
+    notes.text = ""
     
 func _on_text_changed() -> void:
-    print(old_line_count, " ", notes.get_line_count())
     if old_line_count < notes.get_line_count():
         var cross_button = TextureButton.new()
         cross_button.set_normal_texture(cross_texture)
@@ -94,10 +93,8 @@ func _on_text_changed() -> void:
         var count = 0
         for i in notes.get_child_count():
             if notes.get_child(i) is TextureButton:
-                print("button found")
                 count = count + 1
             if count > notes.get_line_count():
-                print("freeing")
                 notes.get_child(i).queue_free()
             
     
@@ -105,7 +102,9 @@ func _on_text_changed() -> void:
 
 func _on_delete_line() -> void:
     var line = notes.get_line_column_at_pos(get_viewport().get_mouse_position() - Vector2(0, notes.get_line_height())).y
-    print(line)
-    notes.set_line(line, "")
-    notes.cursor_set_line(line)
+    if line > 0:
+        notes.set_line(line, "[delete this]")
+        set_notes_text(notes.text.replace("\n[delete this]", ""))
+    else:
+        notes.set_line(line, "")
     notes.grab_focus()

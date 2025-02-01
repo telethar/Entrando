@@ -19,6 +19,12 @@ func _ready() -> void:
     Events.connect("move_doors_notes", self, "_move_doors_notes")
     Events.emit_signal("start_autotracking")
 
+    #$GUILayer/GUI.rect_position = Vector2(0, 0)
+    #$LightWorld.position = Vector2(0, 0) 
+    #$DarkWorld.position = Vector2(750, 0)
+    #$NotesWindow.rect_position = Vector2(1500, 0)
+    #get_tree().set_screen_stretch(get_tree().STRETCH_MODE_2D, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
+    #$"/root".get_viewport().set_size(Vector2(1500, 950))
     set_window_size()
 
     load_data("res://assets/map/750.json")
@@ -147,6 +153,9 @@ func _move_doors_notes() -> void:
         if $"/root/Tracker/Markers":
             for i in $"/root/Tracker/Markers".get_child_count():
                 $"/root/Tracker/Markers".get_child(i).move_local_x(350)
+        for i in $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child_count():
+            if $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i) is TextureButton:
+                $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position = Vector2($NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position.x - 1500, $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position.y)
     else:
         $GUILayer/GUI.rect_position = Vector2(0, 0)
         $LightWorld.position = Vector2(0, 0) 
@@ -155,3 +164,6 @@ func _move_doors_notes() -> void:
         if $"/root/Tracker/Markers":
             for i in $"/root/Tracker/Markers".get_child_count():
                 $"/root/Tracker/Markers".get_child(i).move_local_x(-350)
+        for i in $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child_count():
+            if $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i) is TextureButton:
+                $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position = Vector2($NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position.x + 1500, $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position.y)
