@@ -96,6 +96,12 @@ func menu_pressed(id: int) -> void:
         MENU_LOAD_FILE:
             Events.emit_signal("load_file_clicked")
         MENU_RESET:
+            $"/root/Tracker/GUILayer/GUI".rect_position = Vector2(0, 0)
+            $"/root/Tracker/LightWorld".position = Vector2(0, 0) 
+            $"/root/Tracker/DarkWorld".position = Vector2(750, 0)
+            $"/root/Tracker/NotesWindow".rect_position = Vector2(1500, 0)
+            get_tree().set_screen_stretch(get_tree().STRETCH_MODE_2D, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
+            $"/root".get_viewport().set_size(Vector2(1500, 950))
             get_tree().reload_current_scene()
             Events.emit_signal("tracker_restarted")
         MENU_START_AUTOTRACKING:
