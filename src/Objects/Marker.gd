@@ -8,6 +8,9 @@ var sprite_path: String setget set_sprite_path, get_sprite_path
 
 var sprite: Sprite
 
+onready var count_label = $Label
+onready var count = 0
+
 func init() -> void:
     sprite = $Sprite
 
@@ -16,6 +19,7 @@ func _ready() -> void:
     connect("mouse_entered", self, "_on_mouse_entered")
     connect("mouse_exited", self, "_on_mouse_exited")
     add_to_group(Util.GROUP_MARKER)
+    count_label.text = "%d" % [count]
 
 func _process(_delta: float) -> void:
     if is_following:
@@ -63,6 +67,11 @@ func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void
             and event.is_pressed():
             hide()
             Util.add_hidden(self)
+        elif event.button_index == BUTTON_WHEEL_UP:
+            set_count(count + 1)
+        elif event.button_index == BUTTON_WHEEL_DOWN:
+            if count >= 0:
+                set_count(count - 1)
 
 func _on_mouse_entered() -> void:
     is_hovering = true
@@ -84,3 +93,11 @@ func get_sprite_path() -> String:
     if sprite:
         return sprite.texture.resource_path
     return ""
+
+func set_count(new_count: int) -> void:
+    count = new_count
+    if count >= 0:
+        count_label.visible = true
+    else:
+        count_label.visible = false
+    count_label.text = "%d" % [count]

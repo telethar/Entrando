@@ -4,7 +4,7 @@
 font_path = "res://assets/font/PressStart2P.ttf"
 
 [resource]
-size = 12
+size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
