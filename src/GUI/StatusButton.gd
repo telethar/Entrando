@@ -2,6 +2,7 @@ extends TextureButton
 
 const DISABLED_TEXTURE = preload("res://assets/icons/disabled.png");
 const TODO_TEXTURE = preload("res://assets/icons/todo.png");
+const BLANK_TEXTURE = preload("res://assets/icons/blankTexture.png");
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,9 +14,15 @@ func _gui_input(event: InputEvent) -> void:
         and event.is_pressed():
         match(event.button_index):
             BUTTON_RIGHT:
-                if (get_pressed_texture() != DISABLED_TEXTURE): 
-                    set_pressed_texture(DISABLED_TEXTURE);
-                    set_pressed(false);
+                #if (get_pressed_texture() != DISABLED_TEXTURE): 
+                    #set_pressed_texture(DISABLED_TEXTURE);
+                    #set_pressed(false);
+                
+                set_pressed_texture(BLANK_TEXTURE);
+                if get_parent().self_modulate == Color("282626"):
+                    get_parent().self_modulate = Color("ffffff")
+                else:
+                    get_parent().self_modulate = Color("282626")
             BUTTON_MIDDLE:
                 if (get_pressed_texture() != TODO_TEXTURE):
                     set_pressed_texture(TODO_TEXTURE);

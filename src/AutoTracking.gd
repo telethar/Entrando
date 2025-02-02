@@ -250,15 +250,22 @@ func process_location_data():
         if was_any_change and (all_locs_checked or any_locs_checked):
             var underworld_node = underworld.find_node(loc)
             if (underworld_node):
-                underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
-                underworld_node.get_child(0).set_pressed(true)
+                if all_locs_checked:
+                    underworld_node.self_modulate = Color("282626")
+                else:
+                    underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
+                    underworld_node.get_child(0).set_pressed(true)
             else:
-                var overworld_node = lightworld.find_node("*" + loc + "*")
+                var overworld_node = lightworld.find_node(loc)
                 if (overworld_node == null):
-                    overworld_node = darkworld.find_node("*" + loc + "*")
+                    overworld_node = lightworld.find_node("*@" + loc + "@*")
                     if (overworld_node == null):
-                        print("Error Autotracking: Unable to find node " + loc)
-                        continue
+                        overworld_node = darkworld.find_node(loc)
+                        if (overworld_node == null):
+                            overworld_node = darkworld.find_node("*@" + loc + "@*")
+                            if (overworld_node == null):
+                                print("Error Autotracking: Unable to find node " + loc)
+                                continue
                 overworld_node.get_child(0).hide()
                 # Do this to allow ctrl-z to undo
                 Util.add_hidden(overworld_node.get_child(0))    

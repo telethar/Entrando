@@ -200,7 +200,7 @@ margin_bottom = 44.0
 total_checks = 8
 total_keys = 1
 icon = ExtResource( 5 )
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.678431, 0.380392, 0.235294, 1 )
 
 [node name="EP" parent="NotesMargin/VBoxContainer/Dungeons/LWDungeons" instance=ExtResource( 16 )]
 margin_left = 64.0
