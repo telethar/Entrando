@@ -67,9 +67,9 @@ func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void
             and event.is_pressed():
             hide()
             Util.add_hidden(self)
-        elif event.button_index == BUTTON_WHEEL_UP:
+        elif event.button_index == BUTTON_WHEEL_UP and event.is_pressed():
             set_count(count + 1)
-        elif event.button_index == BUTTON_WHEEL_DOWN:
+        elif event.button_index == BUTTON_WHEEL_DOWN and event.is_pressed():
             if count >= 0:
                 set_count(count - 1)
 
