@@ -58,11 +58,11 @@ flags = 4
 load_path = "res://.import/gt_color.png-f41f4da21357167bfa81f66151f95d8f.stex"
 
 [node name="NotesWindow" type="HSplitContainer"]
-anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1498.0
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+dragger_visibility = 2
 script = ExtResource( 15 )
 
 [node name="NotesMargin" type="MarginContainer" parent="."]
@@ -80,7 +80,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 324.0
 margin_bottom = 942.0
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NotesMargin/VBoxContainer"]
