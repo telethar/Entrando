@@ -82,6 +82,7 @@ func _expand_window() -> void:
 func _clear_notes() -> void:
     notes.text = ""
     notes.grab_focus()
+    _on_text_changed()
     
 func _on_text_changed() -> void:
     if old_line_count < notes.get_line_count():
