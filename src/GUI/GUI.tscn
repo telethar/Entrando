@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=123 format=2]
 
 [ext_resource path="res://src/GUI/MarkerButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/GUI/GUI.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/icons/connectors/library.png" type="Texture" id=28]
 [ext_resource path="res://assets/icons/connectors/spike.png" type="Texture" id=29]
 [ext_resource path="res://assets/icons/blankTexture.png" type="Texture" id=30]
+[ext_resource path="res://assets/icons/undo_hover.png" type="Texture" id=31]
 [ext_resource path="res://assets/icons/dungeons/ganon.png" type="Texture" id=32]
 [ext_resource path="res://assets/icons/items/big_key.png" type="Texture" id=33]
 [ext_resource path="res://assets/icons/items/small_key.png" type="Texture" id=34]
@@ -47,6 +48,7 @@
 [ext_resource path="res://assets/icons/items/bombos.png" type="Texture" id=46]
 [ext_resource path="res://assets/icons/items/glove.png" type="Texture" id=47]
 [ext_resource path="res://src/GUI/AutoTrackingSettings.tscn" type="PackedScene" id=48]
+[ext_resource path="res://assets/icons/undo.png" type="Texture" id=49]
 [ext_resource path="res://assets/icons/blankTextureSmaller.png" type="Texture" id=54]
 [ext_resource path="res://assets/icons/notes.png" type="Texture" id=69]
 [ext_resource path="res://src/GUI/Map.gd" type="Script" id=70]
@@ -276,7 +278,7 @@ size_flags_vertical = 0
 
 [node name="Notes" type="Control" parent="Container"]
 margin_right = 1500.0
-margin_bottom = 748.0
+margin_bottom = 744.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -309,10 +311,10 @@ __meta__ = {
 margin_left = 400.0
 margin_top = 120.0
 margin_right = 1100.0
-margin_bottom = 628.0
+margin_bottom = 624.0
 
 [node name="Margin" type="MarginContainer" parent="Container"]
-margin_top = 752.0
+margin_top = 748.0
 margin_right = 1482.0
 margin_bottom = 950.0
 size_flags_horizontal = 0
@@ -329,11 +331,11 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 1480.0
-margin_bottom = 196.0
+margin_bottom = 200.0
 
 [node name="Entrances" type="VSplitContainer" parent="Container/Margin/HSplitContainer"]
 margin_right = 1478.0
-margin_bottom = 194.0
+margin_bottom = 198.0
 
 [node name="Dungeons" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances"]
 margin_right = 1478.0
@@ -617,18 +619,18 @@ align = 2
 [node name="Entrances" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances"]
 margin_top = 58.0
 margin_right = 1478.0
-margin_bottom = 194.0
+margin_bottom = 198.0
 
 [node name="Connectors" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
 margin_right = 332.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_constants/separation = 2
 
 [node name="2" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Connectors"]
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -636,7 +638,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 3 )
 connector = "spec"
 
@@ -645,7 +647,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 6 )
 connector = "paradox"
 
@@ -654,7 +656,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 13 )
 connector = "mountain"
 
@@ -663,7 +665,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 5 )
 connector = "oldman"
 
@@ -672,7 +674,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 11 )
 connector = "bunny"
 
@@ -681,7 +683,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 18 )
 connector = "bumper"
 
@@ -690,14 +692,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 25 )
 connector = "spiral"
 
 [node name="3" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Connectors"]
-margin_top = 46.0
+margin_top = 47.0
 margin_right = 332.0
-margin_bottom = 90.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -705,7 +707,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 8 )
 connector = "spec"
 
@@ -714,7 +716,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 7 )
 connector = "paradox"
 
@@ -723,7 +725,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 14 )
 connector = "mountain"
 
@@ -732,7 +734,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 12 )
 connector = "oldman"
 
@@ -741,7 +743,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 10 )
 connector = "bunny"
 
@@ -750,7 +752,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 19 )
 connector = "bumper"
 
@@ -759,14 +761,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 26 )
 connector = "spiral"
 
 [node name="4" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Connectors"]
-margin_top = 92.0
+margin_top = 94.0
 margin_right = 332.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -774,7 +776,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 9 )
 connector = "spec"
 
@@ -783,7 +785,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 4 )
 connector = "paradox"
 
@@ -792,7 +794,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 27 )
 connector = "keese"
 
@@ -801,7 +803,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 20 )
 connector = "fairy"
 
@@ -810,7 +812,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 16 )
 connector = "brother"
 
@@ -819,7 +821,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 17 )
 connector = "granny"
 
@@ -828,21 +830,21 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 36 )
 connector = "hookshot"
 
 [node name="Item Caves" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
 margin_left = 336.0
 margin_right = 716.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_constants/separation = 2
 
 [node name="2" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Item Caves"]
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -850,7 +852,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 100 )
 connector = "hype_cave"
 
@@ -859,7 +861,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 96 )
 connector = "mire_shed"
 
@@ -868,7 +870,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 28 )
 connector = "library"
 
@@ -877,7 +879,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 21 )
 connector = "sick_kid"
 
@@ -886,7 +888,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 84 )
 connector = "aginah"
 
@@ -895,7 +897,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 92 )
 connector = "dam"
 
@@ -904,7 +906,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 38 )
 connector = "ice_rod"
 
@@ -913,14 +915,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 336.0
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 94 )
 connector = "hammer_pegs"
 
 [node name="3" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Item Caves"]
-margin_top = 46.0
+margin_top = 47.0
 margin_right = 380.0
-margin_bottom = 90.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -928,7 +930,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 99 )
 connector = "mini_moldorm"
 
@@ -937,7 +939,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 98 )
 connector = "waterfall"
 
@@ -946,7 +948,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 102 )
 connector = "mimic"
 
@@ -955,7 +957,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 90 )
 connector = "chest_game"
 
@@ -964,7 +966,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 91 )
 connector = "chicken_house"
 
@@ -973,7 +975,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 85 )
 connector = "bonkrocks"
 
@@ -982,7 +984,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 86 )
 connector = "brewery"
 
@@ -991,14 +993,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 336.0
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 89 )
 connector = "checkerboard"
 
 [node name="4" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Item Caves"]
-margin_top = 92.0
+margin_top = 94.0
 margin_right = 380.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1006,7 +1008,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 101 )
 connector = "blind"
 
@@ -1015,7 +1017,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 97 )
 connector = "pyramid"
 
@@ -1024,7 +1026,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 29 )
 connector = "spike"
 
@@ -1033,7 +1035,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 88 )
 connector = "cave_45"
 
@@ -1042,7 +1044,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 93 )
 connector = "graveyard_ledge"
 
@@ -1051,7 +1053,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 87 )
 connector = "c_house"
 
@@ -1060,7 +1062,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 95 )
 connector = "kings_tomb"
 
@@ -1069,7 +1071,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 336.0
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = SubResource( 12 )
 connector = "tavern"
 
@@ -1240,14 +1242,14 @@ connector = "lumberjacks"
 [node name="Items" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
 margin_left = 912.0
 margin_right = 1430.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 size_flags_horizontal = 11
 size_flags_vertical = 3
 custom_constants/separation = 2
 
 [node name="2" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items"]
 margin_right = 518.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1255,7 +1257,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 connector = "boots"
 
 [node name="Gloves" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items/2" instance=ExtResource( 1 )]
@@ -1263,7 +1265,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 47 )
 connector = "gloves"
 
@@ -1272,7 +1274,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 40 )
 connector = "flippers"
 
@@ -1281,7 +1283,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 76 )
 connector = "sword"
 
@@ -1290,7 +1292,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = SubResource( 18 )
 connector = "bombs"
 
@@ -1299,7 +1301,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = SubResource( 19 )
 connector = "bottle"
 
@@ -1308,7 +1310,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = SubResource( 20 )
 connector = "book"
 
@@ -1317,14 +1319,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 336.0
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 33 )
 connector = "big_key"
 
 [node name="3" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items"]
-margin_top = 46.0
+margin_top = 47.0
 margin_right = 518.0
-margin_bottom = 90.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1332,7 +1334,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 77 )
 connector = "mirror"
 
@@ -1341,7 +1343,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 35 )
 connector = "hammer"
 
@@ -1350,7 +1352,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 45 )
 connector = "bow"
 
@@ -1359,7 +1361,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = SubResource( 22 )
 connector = "flute"
 
@@ -1368,7 +1370,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 46 )
 connector = "bombos"
 
@@ -1377,7 +1379,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = SubResource( 23 )
 connector = "ether"
 
@@ -1386,7 +1388,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = SubResource( 24 )
 connector = "quake"
 
@@ -1395,14 +1397,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 336.0
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 45.0
 texture_normal = ExtResource( 34 )
 connector = "key"
 
 [node name="4" type="HBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items"]
-margin_top = 92.0
+margin_top = 94.0
 margin_right = 518.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1410,7 +1412,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 44.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 43 )
 connector = "powder"
 
@@ -1419,7 +1421,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 74 )
 connector = "mearl"
 
@@ -1428,7 +1430,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 96.0
 margin_right = 140.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 37 )
 connector = "fire_rod"
 
@@ -1437,7 +1439,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 144.0
 margin_right = 188.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 39 )
 connector = "lamp"
 
@@ -1446,7 +1448,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 192.0
 margin_right = 236.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = ExtResource( 42 )
 connector = "somaria"
 
@@ -1455,7 +1457,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 284.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = SubResource( 27 )
 connector = "byrna_cape"
 
@@ -1464,7 +1466,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 288.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = SubResource( 28 )
 connector = "magic"
 
@@ -1473,7 +1475,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 336.0
 margin_right = 380.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = SubResource( 25 )
 connector = "mushroom"
 
@@ -1482,32 +1484,46 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 384.0
 margin_right = 428.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture_normal = SubResource( 21 )
 connector = "shovel"
 
 [node name="Blank" type="TextureRect" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items/4"]
 margin_left = 432.0
 margin_right = 476.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture = ExtResource( 30 )
 
 [node name="BlankSmaller" type="TextureRect" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Items/4"]
 margin_left = 480.0
 margin_right = 518.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 texture = ExtResource( 54 )
 
 [node name="Settings" type="VBoxContainer" parent="Container/Margin/HSplitContainer/Entrances/Entrances"]
 margin_left = 1434.0
 margin_right = 1478.0
-margin_bottom = 136.0
+margin_bottom = 140.0
 
 [node name="Map" type="TextureRect" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Settings"]
 margin_right = 44.0
 margin_bottom = 44.0
 texture = ExtResource( 69 )
 script = ExtResource( 70 )
+
+[node name="Blank2" type="TextureRect" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Settings"]
+margin_top = 48.0
+margin_right = 44.0
+margin_bottom = 92.0
+texture = ExtResource( 30 )
+
+[node name="TextureButton" type="TextureButton" parent="Container/Margin/HSplitContainer/Entrances/Entrances/Settings"]
+margin_top = 96.0
+margin_right = 44.0
+margin_bottom = 140.0
+hint_tooltip = "Undo (Mouse 4)"
+texture_normal = ExtResource( 49 )
+texture_hover = ExtResource( 31 )
 
 [node name="ATContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0

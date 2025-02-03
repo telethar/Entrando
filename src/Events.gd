@@ -38,3 +38,5 @@ signal set_connected_device(device)
 signal refresh_devices()
 # warning-ignore:unused_signal
 signal open_menu()
+# warning-ignore:unused_signal
+signal undo()

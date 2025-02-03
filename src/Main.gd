@@ -91,7 +91,7 @@ func load_data(path: String) -> bool:
     $LightWorld.load_data(data.light_world)
     $DarkWorld.load_data(data.dark_world)
     markers.load_data(data.markers)
-    $GUILayer/GUI.load_data(data.notes)
+    #$GUILayer/GUI.load_data(data.notes)
     save_file.close()
     return true
 
@@ -119,17 +119,36 @@ func set_window_size() -> void:
     if !save_file.file_exists(path) or save_file.open(path, File.READ) != OK:
         return
     var data = parse_json(save_file.get_as_text())
+    
+    if data.size() > 2:
+        get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, str2var("Vector2" + data.viewport))
+        $"/root".get_viewport().set_size(str2var("Vector2" + data.viewport))
+        if $"/root".get_viewport().size.x < 500:
+            $NotesWindow/NotesMargin/VBoxContainer/HBoxContainer/Expand.visible = true
+            $GUILayer/GUI/PopupMenu.add_item("Move doors notes to the other side", 14)
+        if data.notes == "left":
+            Events.emit_signal("move_doors_notes")
+        if $"/root".get_viewport().size.x > 1600:
+            $GUILayer/GUI/PopupMenu.add_item("Move doors notes to the other side", 14)
     OS.window_size = str2var("Vector2" + data.size)
     OS.window_position = str2var("Vector2" + data.screen)
-
+    
+    
+    
+    
+    
 func save_window_size() -> void:
-    if $"/root".get_viewport().size.x > 1600:
-        OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
-    elif $"/root".get_viewport().size.x < 400:
-        OS.window_size = Vector2(OS.window_size.x * (1500.0/350.0), OS.window_size.y)
+    var notes_side = "right"
+
+    if $NotesWindow.rect_position.x > 1000:
+        notes_side = "right"
+    else:
+        notes_side = "left"
     var data = {    
         "size": OS.window_size,
-        "screen": OS.window_position
+        "screen": OS.window_position,
+        "viewport": $"/root".get_viewport().size,
+        "notes": notes_side
     }
     var path = OS.get_executable_path().trim_suffix(".exe") + "_Settings.ini"
     var save_file = File.new()
@@ -140,6 +159,8 @@ func save_window_size() -> void:
 
 func _move_doors_notes() -> void:
     if $NotesWindow.rect_position.x > 1000:
+        #move left
+        OS.window_position = Vector2(OS.window_position.x - (OS.window_size.x * (350.0/1850.0)), OS.window_position.y)
         $GUILayer/GUI.rect_position = Vector2(350, 0)
         $LightWorld.position = Vector2(350, 0) 
         $DarkWorld.position = Vector2(1100, 0)
@@ -151,6 +172,8 @@ func _move_doors_notes() -> void:
             if $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i) is TextureButton:
                 $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position = Vector2($NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position.x - 1500, $NotesWindow/NotesMargin/VBoxContainer/NotesEdit.get_child(i).rect_position.y)
     else:
+        #move right
+        OS.window_position = Vector2(OS.window_position.x + (OS.window_size.x * (350.0/1850.0)), OS.window_position.y)
         $GUILayer/GUI.rect_position = Vector2(0, 0)
         $LightWorld.position = Vector2(0, 0) 
         $DarkWorld.position = Vector2(750, 0)

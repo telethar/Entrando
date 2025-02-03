@@ -34,7 +34,7 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
-margin_top = 32.0
+margin_top = 33.0
 margin_right = 60.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 60, 0 )
@@ -52,7 +52,7 @@ __meta__ = {
 [node name="KeyLabel" type="Label" parent="."]
 modulate = Color( 0.972549, 0.815686, 0.219608, 1 )
 margin_right = 60.0
-margin_bottom = 27.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 60, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 0

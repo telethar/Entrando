@@ -95,3 +95,4 @@ __meta__ = {
 [node name="NotesWindow" parent="." instance=ExtResource( 7 )]
 margin_left = 1500.0
 margin_right = 2.0
+size_flags_horizontal = 5

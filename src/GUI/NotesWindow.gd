@@ -71,9 +71,12 @@ func get_notes_text() -> String:
     return notes.text
     
 func _expand_window() -> void:
-    OS.window_size = Vector2(OS.window_size.x * (1850.0/350.0), OS.window_size.y)
+    
     get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1850, 950))
     $"/root".get_viewport().set_size(Vector2(1850, 950))
+    OS.window_size = Vector2(OS.window_size.x * (1850.0/350.0), OS.window_size.y)
+    
+    
     expand_button.visible = false
 
 func _clear_notes() -> void:

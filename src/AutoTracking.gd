@@ -2,6 +2,7 @@ extends Node
 
 const DISABLED_TEXTURE = preload("res://assets/icons/disabled.png");
 const TODO_TEXTURE = preload("res://assets/icons/todo.png");
+const BLANK_TEXTURE = preload("res://assets/icons/blankTexture.png");
 
 # The URL we will connect to
 export var websocket_url = "ws://localhost:"
@@ -252,8 +253,11 @@ func process_location_data():
             if (underworld_node):
                 if all_locs_checked:
                     underworld_node.self_modulate = Color("282626")
+                    if !(loc == "ParadoxM" or loc == "ParadoxL"):
+                        underworld_node.get_child(0).set_pressed_texture(BLANK_TEXTURE)
+                        underworld_node.get_child(0).set_pressed(true)
                 else:
-                    underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE);
+                    underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE)
                     underworld_node.get_child(0).set_pressed(true)
             else:
                 var overworld_node = lightworld.find_node(loc)

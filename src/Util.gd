@@ -18,11 +18,11 @@ var last_marker
 func _ready() -> void:
     Events.connect("tracker_restarted", self, "_on_tracker_restarted")
     Events.connect("mode_changed", self, "_on_mode_changed")
+    Events.connect("undo", self, "unhide_node")
 
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventMouseButton \
-        and event.is_pressed() \
-        and len(nodes_hidden) > 0:
+        and event.is_pressed():
          match(event.button_index):
             BUTTON_XBUTTON1:
                 unhide_node()
@@ -45,7 +45,8 @@ func _on_mode_changed(new_mode: int) -> void:
     mode = new_mode
 
 func unhide_node() -> void:
-    var node = nodes_hidden[len(nodes_hidden) - 1]
-    node.show()
-    nodes_hidden.erase(node)
-    Events.emit_signal("entrances_changed", 1)
+    if len(nodes_hidden) > 0:
+        var node = nodes_hidden[len(nodes_hidden) - 1]
+        node.show()
+        nodes_hidden.erase(node)
+        Events.emit_signal("entrances_changed", 1)
