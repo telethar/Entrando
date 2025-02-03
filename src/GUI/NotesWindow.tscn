@@ -61,12 +61,14 @@ load_path = "res://.import/gt_color.png-f41f4da21357167bfa81f66151f95d8f.stex"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1498.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
 script = ExtResource( 15 )
 
 [node name="NotesMargin" type="MarginContainer" parent="."]
 margin_right = 328.0
 margin_bottom = 950.0
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_constants/margin_right = 4
 custom_constants/margin_top = 8

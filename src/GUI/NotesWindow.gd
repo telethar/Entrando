@@ -76,11 +76,12 @@ func _expand_window() -> void:
     $"/root".get_viewport().set_size(Vector2(1850, 950))
     OS.window_size = Vector2(OS.window_size.x * (1850.0/350.0), OS.window_size.y)
     
-    
     expand_button.visible = false
+    notes.grab_focus()
 
 func _clear_notes() -> void:
     notes.text = ""
+    notes.grab_focus()
     
 func _on_text_changed() -> void:
     if old_line_count < notes.get_line_count():
