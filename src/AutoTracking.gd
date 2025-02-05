@@ -3,6 +3,19 @@ extends Node
 const DISABLED_TEXTURE = preload("res://assets/icons/disabled.png");
 const TODO_TEXTURE = preload("res://assets/icons/todo.png");
 const BLANK_TEXTURE = preload("res://assets/icons/blankTexture.png");
+const CHECKED_GREY = Color("282626")
+
+const COMPASSCOUNTSEEN_LOC = 0x403; # Compass count seen flags, for autotracking chest counts in doors
+const MAPCOUNTSEEN_LOC = 0x474; # Map count seen flags, for autotracking key counts in doors
+const COMPASSCOUNT_LOC = 0xF65410; # Max item counts for each dungeon
+const COMPASSCOUNT_OFFSET = 0x500; # Offset in _location_data since it gets appended
+const MAPCOUNT_LOC = 0xF65430; # Max key counts for each dungeon
+const MAPCOUNT_OFFSET = 0x520; # Offset in _location_data since it gets appended
+const CHECKS_LOC = 0x4B0; # Current checks in each dungeon
+const KEYS_LOC = 0x4E0; # Current keys in each dungeon
+const VERSION_LOC = 0x7FC0 # Game version (VT, DR, etc)
+const VERSION_OFFSET = 0x530 # Offset in _location_data since it gets appended
+const BIGKEY_LOC = 0x366 # Big key flags
 
 # The URL we will connect to
 export var websocket_url = "ws://localhost:"
@@ -19,6 +32,7 @@ var SAVEDATA_SIZE = 0x500;
 var VALID_GAMEMODES = [0x07, 0x09, 0x0b]
 var _location_data = null
 var _old_location_data = null
+
 
 var locations_to_sram = {
     "SuperBunnyU": [[0x1F0, 0x30]],
@@ -112,7 +126,6 @@ var _at_status = AUTOTRACKER_STATUS.DISCONNECTED
 
 onready var status_label = $"/root/Tracker/GUILayer/GUI/Container/Margin/HSplitContainer/Entrances/Dungeons/VBoxContainer/AutoTrackStatus"
 onready var notes_window = $"/root/Tracker/NotesWindow"
-
 
 func _ready() -> void:
     # Autotracking stuff
@@ -221,8 +234,8 @@ func get_location_data():
     _client.connect("data_received", self, "_build_location_data")
     read_snes_mem(SAVEDATA_START, 0x500)
     #read_snes_mem(SAVEDATA_START + 0x410, 2)
-    read_snes_mem(0xF65410, 0x30)
-    read_snes_mem(0x7FC0, 2)
+    read_snes_mem(COMPASSCOUNT_LOC, 0x30)
+    read_snes_mem(VERSION_LOC, 2)
     
 
 func process_location_data():
@@ -252,7 +265,7 @@ func process_location_data():
             var underworld_node = underworld.find_node(loc)
             if (underworld_node):
                 if all_locs_checked:
-                    underworld_node.self_modulate = Color("282626")
+                    underworld_node.self_modulate = CHECKED_GREY
                     if !(loc == "ParadoxM" or loc == "ParadoxL"):
                         underworld_node.get_child(0).set_pressed_texture(BLANK_TEXTURE)
                         underworld_node.get_child(0).set_pressed(true)
@@ -260,6 +273,8 @@ func process_location_data():
                     underworld_node.get_child(0).set_pressed_texture(DISABLED_TEXTURE if all_locs_checked else TODO_TEXTURE)
                     underworld_node.get_child(0).set_pressed(true)
             else:
+                # after loading a save locations on the map get loaded as @loc@[RANDOM NUMBER] instead of just loc
+                # can't search for just *loc* because then e.g. "Old Man" marks off "Old Man Rescue Cave"
                 var overworld_node = lightworld.find_node(loc)
                 if (overworld_node == null):
                     overworld_node = lightworld.find_node("*@" + loc + "@*")
@@ -273,19 +288,19 @@ func process_location_data():
                 overworld_node.get_child(0).hide()
                 # Do this to allow ctrl-z to undo
                 Util.add_hidden(overworld_node.get_child(0))    
-#Autotrack dungeon item counts and key counts when in dungeon (not in VT)
-    if !(_location_data[0x530] == 86 and _location_data[0x531] == 84):
-        var dungeon_item_count_seen = (_location_data[0x403] << 8) + _location_data[0x404]
-        var dungeon_key_count_seen = (_location_data[0x474] << 8) + _location_data[0x475]
-        var big_key_field = (_location_data[0x366] << 8) + _location_data[0x367]
+    # Autotrack dungeon item counts and key counts when in dungeon (not in VT)
+    if !(_location_data[VERSION_OFFSET] == 86 and _location_data[VERSION_OFFSET + 1] == 84):
+        var dungeon_item_count_seen = (_location_data[COMPASSCOUNTSEEN_LOC] << 8) + _location_data[COMPASSCOUNTSEEN_LOC + 1]
+        var dungeon_key_count_seen = (_location_data[MAPCOUNTSEEN_LOC] << 8) + _location_data[MAPCOUNTSEEN_LOC + 1]
+        var big_key_field = (_location_data[BIGKEY_LOC] << 8) + _location_data[BIGKEY_LOC + 1]
         for dun in dungeon_masks:
             var mask_data = dungeon_masks[dun]
-            notes_window.find_node(dun).set_current_checks(_location_data[0x4B0 + mask_data[1]] + ((_location_data[0x4B0 + mask_data[1] - 1]) << 8))
-            notes_window.find_node(dun).set_current_keys(_location_data[0x4E0 + (mask_data[1]/2)])
+            notes_window.find_node(dun).set_current_checks(_location_data[CHECKS_LOC + mask_data[1]] + ((_location_data[CHECKS_LOC + mask_data[1] - 1]) << 8))
+            notes_window.find_node(dun).set_current_keys(_location_data[KEYS_LOC + (mask_data[1]/2)])
             if dungeon_item_count_seen & mask_data[0]:
-                notes_window.find_node(dun).set_total_checks(_location_data[0x500 + mask_data[1]] + ((_location_data[0x500 + mask_data[1] - 1]) << 8))
+                notes_window.find_node(dun).set_total_checks(_location_data[COMPASSCOUNT_OFFSET + mask_data[1]] + ((_location_data[COMPASSCOUNT_OFFSET + mask_data[1] - 1]) << 8))
             if dungeon_key_count_seen & mask_data[0]:
-                notes_window.find_node(dun).set_total_keys(_location_data[0x520 + (mask_data[1]/2)])
+                notes_window.find_node(dun).set_total_keys(_location_data[MAPCOUNT_OFFSET + (mask_data[1]/2)])
                 
             #Big Keys
             if big_key_field & mask_data[0]:
@@ -300,17 +315,9 @@ func _build_location_data():
     var res_raw =_client.get_peer(1).get_packet()
     if _location_data == null:
         _location_data = res_raw
-        
-        # Add empty data to pad the array for the SRAM we aren't reading
-        # This allows us to address the array with the real SRAM addresses
-        #var empty_data = PoolByteArray()
-        #empty_data.resize(0x410 - res_raw.size())
-        #empty_data.fill(0)
-        #_location_data = _location_data + empty_data
         return
     else:
         _location_data = _location_data + res_raw
-    #if _location_data.size() == 0x410 + 2:
         
     if _location_data.size() > 0x530:
         _client.disconnect("data_received", self, "_build_location_data")

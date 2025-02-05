@@ -7,21 +7,34 @@ var old_line_count = 0
 
 onready var cross_texture
 onready var cross_hover
-onready var current_label = $NotesMargin/VBoxContainer/Current/Label
-onready var current_slider = $NotesMargin/VBoxContainer/Current/Slider
-onready var total_label = $NotesMargin/VBoxContainer/Total/Label
-onready var total_slider = $NotesMargin/VBoxContainer/Total/Slider
+onready var keys_saved_label = $NotesMargin/VBoxContainer/Current/KeysSavedLabel
+onready var keys_saved_slider = $NotesMargin/VBoxContainer/Current/KeysSavedSlider
+onready var keys_needed_label = $NotesMargin/VBoxContainer/Total/KeysNeededLabel
+onready var keys_needed_slider = $NotesMargin/VBoxContainer/Total/KeysNeededSlider
+onready var vitals_current_label = $NotesMargin/VBoxContainer/Current/VitalsCurrentLabel
+onready var vitals_current_slider = $NotesMargin/VBoxContainer/Current/VitalsCurrentSlider
+onready var vitals_total_label = $NotesMargin/VBoxContainer/Total/VitalsTotalLabel
+onready var vitals_total_slider = $NotesMargin/VBoxContainer/Total/VitalsTotalSlider
+onready var vitals_checkbox = $NotesMargin/VBoxContainer/ChecksContainer/VitalsCheckBox
 onready var expand_button = $NotesMargin/VBoxContainer/HBoxContainer/Expand
 onready var clear_button = $NotesMargin/VBoxContainer/ChecksContainer/ClearButton
 onready var selectedDungeon = $NotesMargin/VBoxContainer/Dungeons/LWDungeons/HC
 onready var notes = $NotesMargin/VBoxContainer/NotesEdit
+onready var timer = Timer.new() #timer to update position of x buttons properly when clicking on a dungeon (TextEdit is bad and needs this)
 
 func _ready() -> void:
     Events.connect("dungeon_clicked", self, "_on_dungeon_clicked")
-    Events.connect("total_checks_changed", self, "_selected_total_changed")
-    Events.connect("current_checks_changed", self, "_selected_current_changed")
-    current_slider.connect("value_changed", self, "_current_checks_changed")
-    total_slider.connect("value_changed", self, "_total_checks_changed")
+    Events.connect("current_vitals_changed", self, "_current_vitals_changed")
+    Events.connect("total_vitals_changed", self, "_total_vitals_changed")
+    keys_saved_slider.connect("value_changed", self, "_saved_keys_changed")
+    keys_needed_slider.connect("value_changed", self, "_needed_keys_changed")
+    vitals_current_slider.connect("value_changed", self, "_current_vitals_changed")
+    vitals_total_slider.connect("value_changed", self, "_total_vitals_changed")
+    keys_saved_slider.connect("value_changed", selectedDungeon, "_saved_keys_changed")
+    keys_needed_slider.connect("value_changed", selectedDungeon, "_needed_keys_changed")
+    vitals_current_slider.connect("value_changed", selectedDungeon, "_current_vitals_changed")
+    vitals_total_slider.connect("value_changed", selectedDungeon, "_total_vitals_changed")
+    vitals_checkbox.connect("toggled", selectedDungeon, "_vitals_checkbox_toggled")
     expand_button.connect("button_down", self, "_expand_window")
     clear_button.connect("button_down", self, "_clear_notes")
     notes.connect("text_changed", self, "_on_text_changed")
@@ -30,37 +43,53 @@ func _ready() -> void:
     cross_texture = load("res://assets/icons/cross.png")
     cross_hover = load("res://assets/icons/cross_hover.png")
     
+    self.add_child(timer)
+    timer.wait_time = 0.005
+    timer.one_shot = true
+    timer.connect("timeout", self, "_on_timer_timeout")
     _on_dungeon_clicked(selectedDungeon)
 
 
 func _on_dungeon_clicked(dungeon: Node) -> void:
     selectedDungeon.selected(false)
     selectedDungeon.text = get_notes_text()
-    current_slider.disconnect("value_changed", selectedDungeon, "_current_checks_changed")
-    total_slider.disconnect("value_changed", selectedDungeon, "_total_checks_changed")
+    keys_saved_slider.disconnect("value_changed", selectedDungeon, "_saved_keys_changed")
+    keys_needed_slider.disconnect("value_changed", selectedDungeon, "_needed_keys_changed")
+    vitals_current_slider.disconnect("value_changed", selectedDungeon, "_current_vitals_changed")
+    vitals_total_slider.disconnect("value_changed", selectedDungeon, "_total_vitals_changed")
+    vitals_checkbox.disconnect("toggled", selectedDungeon, "_vitals_checkbox_toggled")
     selectedDungeon = dungeon
     set_notes_text(selectedDungeon.text)
     selectedDungeon.selected(true)
-    current_slider.value = selectedDungeon.current_checks
-    current_slider.connect("value_changed", selectedDungeon, "_current_checks_changed")
-    total_slider.value = selectedDungeon.total_checks
-    total_slider.connect("value_changed", selectedDungeon, "_total_checks_changed")
-    total_label.text = "%d" % total_slider.value
-    current_label.text = "%d" % min(current_slider.value, total_slider.value)
+    keys_saved_slider.value = selectedDungeon.keys_saved
+    keys_saved_slider.connect("value_changed", selectedDungeon, "_saved_keys_changed")
+    keys_needed_slider.value = selectedDungeon.keys_needed
+    keys_needed_slider.connect("value_changed", selectedDungeon, "_needed_keys_changed")
+    vitals_current_slider.value = selectedDungeon.current_vitals
+    vitals_current_slider.connect("value_changed", selectedDungeon, "_current_vitals_changed")
+    vitals_total_slider.value = selectedDungeon.total_vitals
+    vitals_total_slider.connect("value_changed", selectedDungeon, "_total_vitals_changed")
+    vitals_checkbox.pressed = selectedDungeon.show_vitals
+    vitals_checkbox.connect("toggled", selectedDungeon, "_vitals_checkbox_toggled")
+    keys_saved_label.text = "%d" % keys_saved_slider.value
+    keys_needed_label.text = "%d" % keys_needed_slider.value
+    vitals_current_label.text = "%d" % vitals_current_slider.value
+    vitals_total_label.text = "%d" % vitals_total_slider.value
+    timer.start()
 
-func _current_checks_changed(_value: int) -> void:
-    current_label.text = "%d" % min(current_slider.value, total_slider.value)
-    current_slider.value = min(current_slider.value, total_slider.value)
+func _current_vitals_changed(_value: int) -> void:
+    vitals_current_slider.value = _value
+    vitals_current_label.text = "%d" % vitals_current_slider.value
 
-func _total_checks_changed(_value: int) -> void:
-    total_label.text = "%d" % total_slider.value
-    current_slider.value = min(current_slider.value, total_slider.value)
+func _total_vitals_changed(_value: int) -> void:
+    vitals_total_slider.value = _value
+    vitals_total_label.text = "%d" % vitals_total_slider.value
     
-func _selected_total_changed(_value: int) -> void:
-    total_slider.value = _value
+func _saved_keys_changed(_value: int) -> void:
+    keys_saved_label.text = "%d" % keys_saved_slider.value
     
-func _selected_current_changed(_value: int) -> void:
-    current_slider.value = _value
+func _needed_keys_changed(_value: int) -> void:
+    keys_needed_label.text = "%d" % keys_needed_slider.value
 
 func set_notes_text(value: String) -> void:
     notes.text = value
@@ -85,24 +114,27 @@ func _clear_notes() -> void:
     _on_text_changed()
     
 func _on_text_changed() -> void:
+    # add x buttons
     if old_line_count < notes.get_line_count():
-        var cross_button = TextureButton.new()
-        cross_button.set_normal_texture(cross_texture)
-        cross_button.set_hover_texture(cross_hover)
-        cross_button.set_as_toplevel(true)
-        cross_button.rect_position = Vector2(clear_button.rect_global_position.x, notes.get_pos_at_line_column(notes.get_line_count()-1, 0).y)
-        notes.add_child(cross_button)
-        cross_button.connect("button_down", self, "_on_delete_line")
+        for i in range(old_line_count, notes.get_line_count()):
+            var cross_button = TextureButton.new()
+            cross_button.set_normal_texture(cross_texture)
+            cross_button.set_hover_texture(cross_hover)
+            cross_button.set_as_toplevel(true)
+            cross_button.rect_position = Vector2(clear_button.rect_global_position.x, notes.get_pos_at_line_column(i, 0).y)
+            notes.add_child(cross_button)
+            cross_button.connect("button_down", self, "_on_delete_line")
     
-    if old_line_count > notes.get_line_count():
-        var count = 0
-        for i in notes.get_child_count():
-            if notes.get_child(i) is TextureButton:
-                count = count + 1
+    # update x button positions
+    var count = 0
+    for i in notes.get_child_count():
+        if notes.get_child(i) is TextureButton:
+            count = count + 1
             if count > notes.get_line_count():
                 notes.get_child(i).queue_free()
-            
-    
+            else:
+                notes.get_child(i).rect_position = Vector2(clear_button.rect_global_position.x, notes.get_pos_at_line_column(count-1, 0).y)
+        
     old_line_count = notes.get_line_count()
 
 func _on_delete_line() -> void:
@@ -111,5 +143,12 @@ func _on_delete_line() -> void:
         notes.set_line(line, "[delete this]")
         set_notes_text(notes.text.replace("\n[delete this]", ""))
     else:
-        notes.set_line(line, "")
+        if notes.get_line_count() > 1:
+            notes.set_line(line, "[delete this]")
+            set_notes_text(notes.text.replace("[delete this]\n", ""))
+        else:
+            notes.set_line(line, "")
     notes.grab_focus()
+
+func _on_timer_timeout() -> void:
+    _on_text_changed()

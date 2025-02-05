@@ -91,7 +91,6 @@ func load_data(path: String) -> bool:
     $LightWorld.load_data(data.light_world)
     $DarkWorld.load_data(data.dark_world)
     markers.load_data(data.markers)
-    #$GUILayer/GUI.load_data(data.notes)
     save_file.close()
     return true
 
@@ -132,11 +131,7 @@ func set_window_size() -> void:
             $GUILayer/GUI/PopupMenu.add_item("Move doors notes to the other side", 14)
     OS.window_size = str2var("Vector2" + data.size)
     OS.window_position = str2var("Vector2" + data.screen)
-    
-    
-    
-    
-    
+  
 func save_window_size() -> void:
     var notes_side = "right"
 

@@ -19,9 +19,9 @@ signal notes_clicked(node)
 # warning-ignore:unused_signal
 signal dungeon_clicked(node)
 # warning-ignore:unused_signal
-signal current_checks_changed(_value)
+signal current_vitals_changed(_value)
 # warning-ignore:unused_signal
-signal total_checks_changed(_value)
+signal total_vitals_changed(_value)
 # warning-ignore:unused_signal
 signal move_doors_notes()
 # warning-ignore:unused_signal

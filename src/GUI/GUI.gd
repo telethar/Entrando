@@ -115,7 +115,6 @@ func menu_pressed(id: int) -> void:
             if $"/root".get_viewport().size.x > 1600:
                 if ($"/root/Tracker/NotesWindow".rect_position.x < 100):
                     Events.emit_signal("move_doors_notes")
-                    OS.window_position = Vector2(OS.window_position.x + (OS.window_size.x * (350.0/1850.0)), OS.window_position.y)
                 OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
                 get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
                 $"/root".get_viewport().set_size(Vector2(1500, 950))
