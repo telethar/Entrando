@@ -16,7 +16,22 @@ enum {
     MENU_TOGGLE_DOORS_NOTES = 12,
     MENU_NOTES_ONLY = 13,
     MENU_MOVE_DOORS_NOTES = 14,
+    MENU_SUB_MENU = 15
 }
+
+enum {
+    PRESET_ZELGA = 0,
+    PRESET_LEGACY = 1,
+    PRESET_FULL = 2, 
+    PRESET_KEYDROP = 3,
+    PRESET_KEYSANITY = 4
+   }
+
+const zelgawoods = "res://assets/map/zelga.json"
+const full_map = "res://assets/map/750.json"
+const legacywoods = "res://assets/map/legacy.json"
+const keydrop_notes = "res://assets/map/keydrop_notes.json"
+const keysanity_notes = "res://assets/map/keysanity_notes.json"
 
 onready var menu = $PopupMenu
 onready var autotrack_menu = $ATContainer/AutoTrackingSettings
@@ -28,6 +43,7 @@ onready var tooltip_timer = $TooltipPopup/Timer
 onready var notes_modal = $Container/Notes/Shadow
 onready var notes_container = $Container/Notes/Shadow/Container/BG
 onready var undo_button = $Container/Margin/HSplitContainer/Entrances/Entrances/Settings/TextureButton
+onready var submenu = $PopupMenu/PresetMenu
 
 onready var autotracking_scene: PackedScene = preload("res://src/GUI/AutoTrackingSettings.tscn")
 
@@ -37,12 +53,15 @@ func _ready() -> void:
     Events.connect("notes_clicked", self, "open_notes")
     Events.connect("open_menu", self, "_open_menu")
     menu.connect("id_pressed", self, "menu_pressed")
+    submenu.connect("id_pressed", self, "submenu_pressed")
     undo_button.connect("button_down", self, "_on_undo")
-
+    self.add_child(submenu)
+    
     menu.add_item("!!RESET!!", MENU_RESET)
     menu.add_separator()
     menu.add_item("Save", MENU_SAVE_FILE, KEY_S | KEY_MASK_CTRL)
     menu.add_item("Load", MENU_LOAD_FILE, KEY_O | KEY_MASK_CTRL)
+    menu.add_submenu_item("Load Preset", submenu.name, MENU_SUB_MENU)
     menu.add_separator()
     menu.add_check_item("Show Remaining Entrances", MENU_REMAINING_ENTRANCES)
     menu.add_check_item("Drag n' Drop Markers", MENU_DRAG_N_DROP)
@@ -52,7 +71,13 @@ func _ready() -> void:
     menu.add_item("Auto-Tracking Settings", MENU_AUTOTRACKING_SETTINGS)
     menu.add_separator()
     menu.add_item("Toggle Doors Notes", MENU_TOGGLE_DOORS_NOTES)
-    menu.add_item("Toggle Notes Only Mode", MENU_NOTES_ONLY)        
+    menu.add_item("Toggle Notes Only Mode", MENU_NOTES_ONLY)     
+    
+    submenu.add_item("Zelgawoods", PRESET_ZELGA) 
+    submenu.add_item("Legacy Skull Woods", PRESET_LEGACY) 
+    submenu.add_item("Full Skull Woods", PRESET_FULL) 
+    submenu.add_item("Keydrop Notes", PRESET_KEYDROP) 
+    submenu.add_item("Keysanity Notes", PRESET_KEYSANITY) 
 
     tooltip_timer.connect("timeout", self, "_on_tooltip_timeout")
     
@@ -140,6 +165,21 @@ func menu_pressed(id: int) -> void:
             get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(350, 950))
             $"/root".get_viewport().set_size(Vector2(350, 950))
             $"/root/Tracker/NotesWindow/NotesMargin/VBoxContainer/HBoxContainer/Expand".visible = true
+            
+func submenu_pressed(id: int) -> void:
+    if submenu.is_item_checkable(id):
+        submenu.set_item_checked(id, !submenu.is_item_checked(id))
+    match(id):
+        PRESET_ZELGA:
+             $"/root/Tracker".load_data(zelgawoods)
+        PRESET_LEGACY:
+            $"/root/Tracker".load_data(legacywoods)
+        PRESET_FULL:
+            $"/root/Tracker".load_data(full_map)
+        PRESET_KEYDROP:
+            $"/root/Tracker".load_data(keydrop_notes)
+        PRESET_KEYSANITY:
+            $"/root/Tracker".load_data(keysanity_notes)
 
 func _on_notes_entered(node: Node) -> void:
     if tooltip.visible:

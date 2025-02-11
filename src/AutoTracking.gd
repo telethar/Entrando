@@ -233,7 +233,6 @@ func get_location_data():
     _client.disconnect("data_received", self, "_on_data")
     _client.connect("data_received", self, "_build_location_data")
     read_snes_mem(SAVEDATA_START, 0x500)
-    #read_snes_mem(SAVEDATA_START + 0x410, 2)
     read_snes_mem(COMPASSCOUNT_LOC, 0x30)
     read_snes_mem(VERSION_LOC, 2)
     

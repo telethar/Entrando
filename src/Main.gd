@@ -1,5 +1,8 @@
 extends Node
 
+const zelgawoods = "res://assets/map/zelga.json"
+
+
 onready var marker_scene: PackedScene = preload("res://src/Objects/Marker.tscn")
 onready var markers: Node2D = $Markers
 
@@ -21,7 +24,7 @@ func _ready() -> void:
 
     set_window_size()
 
-    load_data("res://assets/map/750.json")
+    load_data(zelgawoods)
 
 func _notification(what: int) -> void:
     if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -72,7 +75,8 @@ func save_data(path: String) -> bool:
         "light_world": $LightWorld.save_data(),
         "dark_world": $DarkWorld.save_data(),
         "markers": markers.save_data(),
-        "notes": $GUILayer/GUI.save_data()
+        #"notes": $GUILayer/GUI.save_data()
+        "notes": $NotesWindow.save_data()
     }
     var save_file = File.new()
     if save_file.open(path, File.WRITE) != OK:
@@ -91,6 +95,8 @@ func load_data(path: String) -> bool:
     $LightWorld.load_data(data.light_world)
     $DarkWorld.load_data(data.dark_world)
     markers.load_data(data.markers)
+    if "notes" in data and data.notes is Array:
+        $NotesWindow.load_data(data.notes)
     save_file.close()
     return true
 

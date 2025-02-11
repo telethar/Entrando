@@ -1581,6 +1581,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PresetMenu" type="PopupMenu" parent="PopupMenu"]
+margin_right = 44.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 44 )
+
 [node name="TooltipPopup" type="PopupPanel" parent="."]
 margin_right = 8.0
 margin_bottom = 8.0

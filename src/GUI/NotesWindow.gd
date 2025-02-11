@@ -1,9 +1,12 @@
 extends HSplitContainer
 
-
 var text: String setget set_notes_text, get_notes_text
 
 var old_line_count = 0
+
+const DoorsButton = preload("res://src/GUI/DoorsButton.gd")
+
+const dungeon_names = ["HC", "EP", "DP", "TH", "AT", "PD", "SP", "SW", "TT", "IP", "MM", "TR", "GT"]
 
 onready var cross_texture
 onready var cross_hover
@@ -152,3 +155,20 @@ func _on_delete_line() -> void:
 
 func _on_timer_timeout() -> void:
     _on_text_changed()
+
+func save_data() -> Array:
+    selectedDungeon.text = get_notes_text()
+    var dungeon_notes = []
+    for dun in dungeon_names:
+        dungeon_notes.append({
+            "dungeon_name": dun,
+            "text": find_node(dun).text,
+            })
+    return dungeon_notes
+
+func load_data(dungeon_notes: Array) -> void:
+    for dungeon in dungeon_notes:
+        find_node(dungeon.dungeon_name).text = dungeon.text
+        if selectedDungeon.name == dungeon.dungeon_name:
+            notes.text = dungeon.text
+    timer.start()
