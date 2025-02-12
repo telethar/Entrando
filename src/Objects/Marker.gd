@@ -8,6 +8,9 @@ var sprite_path: String setget set_sprite_path, get_sprite_path
 
 var sprite: Sprite
 
+onready var count_label = $Label
+onready var count = 0
+
 func init() -> void:
     sprite = $Sprite
 
@@ -16,53 +19,59 @@ func _ready() -> void:
     connect("mouse_entered", self, "_on_mouse_entered")
     connect("mouse_exited", self, "_on_mouse_exited")
     add_to_group(Util.GROUP_MARKER)
+    count_label.text = "%d" % [count]
 
 func _process(_delta: float) -> void:
     if is_following:
-	    global_position = get_global_mouse_position()
+        global_position = get_global_mouse_position()
 
 func _draw() -> void:
     if connector == "":
-	    return
+        return
     if !visible:
-	    return
+        return
     if is_following:
-	    return
+        return
     if !is_hovering:
-	    return
+        return
 
     for node in get_tree().get_nodes_in_group(connector):
-	    if node == self \
-		    or !node.visible:
-		    continue
-	    draw_line(
-		    Vector2.ZERO,
-		    node.global_position - global_position,
-		    Color.red,
-		    2, true
-		)
+        if node == self \
+            or !node.visible:
+            continue
+        draw_line(
+            Vector2.ZERO,
+            node.global_position - global_position,
+            Color.red,
+            2, true
+        )
 
 func _input(event: InputEvent) -> void:
     if !Util.drag_and_drop:
-	    return
+        return
 
     if event is InputEventMouseButton \
-	    and event.button_index == BUTTON_LEFT \
-	    and !event.is_pressed():
-		    is_following = false
-		    if global_position.y > 750:
-			    queue_free()
+        and event.button_index == BUTTON_LEFT \
+        and !event.is_pressed():
+            is_following = false
+            if global_position.y > 750:
+                queue_free()
 
 func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void:
     if event is InputEventMouseButton:
-	    if event.button_index == BUTTON_LEFT:
-		    is_following = event.is_pressed()
-		    if !is_following and global_position.y > 750:
-			    queue_free()
-	    elif event.button_index == BUTTON_RIGHT \
-		    and event.is_pressed():
-		    hide()
-		    Util.add_hidden(self)
+        if event.button_index == BUTTON_LEFT:
+            is_following = event.is_pressed()
+            if !is_following and global_position.y > 750:
+                queue_free()
+        elif event.button_index == BUTTON_RIGHT \
+            and event.is_pressed():
+            hide()
+            Util.add_hidden(self)
+        elif event.button_index == BUTTON_WHEEL_UP and event.is_pressed():
+            set_count(count + 1)
+        elif event.button_index == BUTTON_WHEEL_DOWN and event.is_pressed():
+            if count >= 0:
+                set_count(count - 1)
 
 func _on_mouse_entered() -> void:
     is_hovering = true
@@ -78,9 +87,17 @@ func set_sprite(texture: Texture) -> void:
 func set_sprite_path(path: String) -> void:
     var texture = load(path)
     if texture is Texture:
-	    sprite.texture = texture
+        sprite.texture = texture
 
 func get_sprite_path() -> String:
     if sprite:
-	    return sprite.texture.resource_path
+        return sprite.texture.resource_path
     return ""
+
+func set_count(new_count: int) -> void:
+    count = new_count
+    if count >= 0:
+        count_label.visible = true
+    else:
+        count_label.visible = false
+    count_label.text = "%d" % [count]
