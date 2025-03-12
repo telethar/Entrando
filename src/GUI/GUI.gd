@@ -12,7 +12,26 @@ enum {
     # 8 separator
     MENU_START_AUTOTRACKING = 9,
     MENU_AUTOTRACKING_SETTINGS = 10,
+    # 11 separator
+    MENU_TOGGLE_DOORS_NOTES = 12,
+    MENU_NOTES_ONLY = 13,
+    MENU_MOVE_DOORS_NOTES = 14,
+    MENU_SUB_MENU = 15
 }
+
+enum {
+    PRESET_ZELGA = 0,
+    PRESET_LEGACY = 1,
+    PRESET_FULL = 2, 
+    PRESET_KEYDROP = 3,
+    PRESET_KEYSANITY = 4
+   }
+
+const zelgawoods = "res://assets/map/zelga.json"
+const full_map = "res://assets/map/750.json"
+const legacywoods = "res://assets/map/legacy.json"
+const keydrop_notes = "res://assets/map/keydrop_notes.json"
+const keysanity_notes = "res://assets/map/keysanity_notes.json"
 
 onready var menu = $PopupMenu
 onready var autotrack_menu = $ATContainer/AutoTrackingSettings
@@ -23,6 +42,8 @@ onready var tooltip_container = $TooltipPopup/Margin/Container
 onready var tooltip_timer = $TooltipPopup/Timer
 onready var notes_modal = $Container/Notes/Shadow
 onready var notes_container = $Container/Notes/Shadow/Container/BG
+onready var undo_button = $Container/Margin/HSplitContainer/Entrances/Entrances/Settings/TextureButton
+onready var submenu = $PopupMenu/PresetMenu
 
 onready var autotracking_scene: PackedScene = preload("res://src/GUI/AutoTrackingSettings.tscn")
 
@@ -30,12 +51,17 @@ var last_hovered: MarginContainer
 
 func _ready() -> void:
     Events.connect("notes_clicked", self, "open_notes")
+    Events.connect("open_menu", self, "_open_menu")
     menu.connect("id_pressed", self, "menu_pressed")
-
+    submenu.connect("id_pressed", self, "submenu_pressed")
+    undo_button.connect("button_down", self, "_on_undo")
+    self.add_child(submenu)
+    
     menu.add_item("!!RESET!!", MENU_RESET)
     menu.add_separator()
     menu.add_item("Save", MENU_SAVE_FILE, KEY_S | KEY_MASK_CTRL)
     menu.add_item("Load", MENU_LOAD_FILE, KEY_O | KEY_MASK_CTRL)
+    menu.add_submenu_item("Load Preset", submenu.name, MENU_SUB_MENU)
     menu.add_separator()
     menu.add_check_item("Show Remaining Entrances", MENU_REMAINING_ENTRANCES)
     menu.add_check_item("Drag n' Drop Markers", MENU_DRAG_N_DROP)
@@ -43,6 +69,15 @@ func _ready() -> void:
     menu.add_separator()
     menu.add_item("(Re)connect Auto-Tracking", MENU_START_AUTOTRACKING)
     menu.add_item("Auto-Tracking Settings", MENU_AUTOTRACKING_SETTINGS)
+    menu.add_separator()
+    menu.add_item("Toggle Doors Notes", MENU_TOGGLE_DOORS_NOTES)
+    menu.add_item("Toggle Notes Only Mode", MENU_NOTES_ONLY)     
+    
+    submenu.add_item("Zelgawoods", PRESET_ZELGA) 
+    submenu.add_item("Legacy Skull Woods", PRESET_LEGACY) 
+    submenu.add_item("Full Skull Woods", PRESET_FULL) 
+    submenu.add_item("Keydrop Notes", PRESET_KEYDROP) 
+    submenu.add_item("Keysanity Notes", PRESET_KEYSANITY) 
 
     tooltip_timer.connect("timeout", self, "_on_tooltip_timeout")
     
@@ -69,7 +104,7 @@ func open_notes(node: Node) -> void:
     notes_container.add_child(node)
     notes_modal.show()
 
-func open_menu() -> void:
+func _open_menu() -> void:
     menu.popup()
     menu.rect_global_position = get_global_mouse_position() - menu.rect_size
 
@@ -88,12 +123,63 @@ func menu_pressed(id: int) -> void:
         MENU_LOAD_FILE:
             Events.emit_signal("load_file_clicked")
         MENU_RESET:
+            $"/root/Tracker/GUILayer/GUI".rect_position = Vector2(0, 0)
+            $"/root/Tracker/LightWorld".position = Vector2(0, 0) 
+            $"/root/Tracker/DarkWorld".position = Vector2(750, 0)
+            $"/root/Tracker/NotesWindow".rect_position = Vector2(1500, 0)
+            get_tree().set_screen_stretch(get_tree().STRETCH_MODE_2D, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
+            $"/root".get_viewport().set_size(Vector2(1500, 950))
             get_tree().reload_current_scene()
             Events.emit_signal("tracker_restarted")
         MENU_START_AUTOTRACKING:
             Events.emit_signal("start_autotracking")
         MENU_AUTOTRACKING_SETTINGS:
             autotrack_menu_modal.show()
+        MENU_TOGGLE_DOORS_NOTES:
+            #close notes
+            if $"/root".get_viewport().size.x > 1600:
+                if ($"/root/Tracker/NotesWindow".rect_position.x < 100):
+                    Events.emit_signal("move_doors_notes")
+                OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
+                get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
+                $"/root".get_viewport().set_size(Vector2(1500, 950))
+                menu.remove_item(MENU_MOVE_DOORS_NOTES)
+            #open notes
+            else:
+                OS.window_size = Vector2(OS.window_size.x * (1850.0/1500.0), OS.window_size.y)
+                get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1850, 950))
+                $"/root".get_viewport().set_size(Vector2(1850, 950))
+                menu.add_item("Move doors notes to the other side", MENU_MOVE_DOORS_NOTES)
+        MENU_MOVE_DOORS_NOTES:
+            Events.emit_signal("move_doors_notes")
+        MENU_NOTES_ONLY:
+            if $"/root".get_viewport().size.x < 1600:
+                OS.window_size = Vector2(OS.window_size.x * (1850.0/1500.0), OS.window_size.y)
+                get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1850, 950))
+                $"/root".get_viewport().set_size(Vector2(1850, 950))
+            if ($"/root/Tracker/NotesWindow".rect_position.x > 100):
+                Events.emit_signal("move_doors_notes")
+                if !menu.get_item_id(MENU_MOVE_DOORS_NOTES):
+                    menu.add_item("Move doors notes to the other side", MENU_MOVE_DOORS_NOTES)
+            OS.window_size = Vector2(OS.window_size.x * (350.0/$"/root".get_viewport().size.x), OS.window_size.y)
+            get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(350, 950))
+            $"/root".get_viewport().set_size(Vector2(350, 950))
+            $"/root/Tracker/NotesWindow/NotesMargin/VBoxContainer/HBoxContainer/Expand".visible = true
+            
+func submenu_pressed(id: int) -> void:
+    if submenu.is_item_checkable(id):
+        submenu.set_item_checked(id, !submenu.is_item_checked(id))
+    match(id):
+        PRESET_ZELGA:
+             $"/root/Tracker".load_data(zelgawoods)
+        PRESET_LEGACY:
+            $"/root/Tracker".load_data(legacywoods)
+        PRESET_FULL:
+            $"/root/Tracker".load_data(full_map)
+        PRESET_KEYDROP:
+            $"/root/Tracker".load_data(keydrop_notes)
+        PRESET_KEYSANITY:
+            $"/root/Tracker".load_data(keysanity_notes)
 
 func _on_notes_entered(node: Node) -> void:
     if tooltip.visible:
@@ -120,3 +206,6 @@ func _on_notes_exited() -> void:
     tooltip.hide()
     for child in tooltip_container.get_children():
         child.queue_free()
+
+func _on_undo() -> void:
+    Events.emit_signal("undo")

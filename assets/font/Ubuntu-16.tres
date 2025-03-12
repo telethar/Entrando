@@ -4,6 +4,7 @@
 font_path = "res://assets/font/Ubuntu.ttf"
 
 [resource]
+size = 20
 use_mipmaps = true
 use_filter = true
 font_data = SubResource( 1 )

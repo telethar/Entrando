@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/icons/dungeons/hc.png" type="Texture" id=1]
+[ext_resource path="res://assets/font/PressStart2P-12.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/GUI/DoorsButton.gd" type="Script" id=3]
+[ext_resource path="res://assets/icons/items/big_key_small.png" type="Texture" id=4]
+
+[node name="DoorsButton" type="MarginContainer"]
+margin_right = 60.0
+margin_bottom = 44.0
+mouse_filter = 1
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_right = 60.0
+margin_bottom = 44.0
+color = Color( 0.760784, 0.239216, 0.0980392, 0.690196 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+margin_right = 60.0
+margin_bottom = 44.0
+border_color = Color( 0.803922, 0.513726, 0.0235294, 1 )
+border_width = 3.0
+editor_only = false
+
+[node name="Texture" type="TextureRect" parent="."]
+margin_right = 60.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 60, 44 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+margin_top = 33.0
+margin_right = 60.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 60, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "99/99"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyLabel" type="Label" parent="."]
+modulate = Color( 0.972549, 0.815686, 0.219608, 1 )
+margin_right = 60.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "9
+9"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigKey" type="TextureRect" parent="."]
+visible = false
+margin_right = 18.0
+margin_bottom = 18.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 4 )

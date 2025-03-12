@@ -16,7 +16,14 @@ signal mode_changed(new_mode)
 signal marker_clicked(texture, color, connector)
 # warning-ignore:unused_signal
 signal notes_clicked(node)
-
+# warning-ignore:unused_signal
+signal dungeon_clicked(node)
+# warning-ignore:unused_signal
+signal current_vitals_changed(_value)
+# warning-ignore:unused_signal
+signal total_vitals_changed(_value)
+# warning-ignore:unused_signal
+signal move_doors_notes()
 # warning-ignore:unused_signal
 signal start_autotracking()
 # warning-ignore:unused_signal
@@ -29,3 +36,7 @@ signal set_selected_device(device)
 signal set_connected_device(device)
 # warning-ignore:unused_signal
 signal refresh_devices()
+# warning-ignore:unused_signal
+signal open_menu()
+# warning-ignore:unused_signal
+signal undo()
