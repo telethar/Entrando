@@ -118,15 +118,16 @@ func _open_menu() -> void:
     menu.rect_global_position = get_global_mouse_position() - menu.rect_size
 
 func menu_pressed(id: int) -> void:
-    if menu.is_item_checkable(id):
-        menu.set_item_checked(id, !menu.is_item_checked(id))
+    var idx = menu.get_item_index(id)
+    if menu.is_item_checkable(idx):
+        menu.set_item_checked(idx, !menu.is_item_checked(idx))
     match(id):
         MENU_OW_ITEMS:
             get_tree().call_group(Util.GROUP_ITEMS, "queue_free")
         MENU_DRAG_N_DROP:
-            Util.drag_and_drop = menu.is_item_checked(id)
+            Util.drag_and_drop = menu.is_item_checked(idx)
         MENU_REMAINING_ENTRANCES:
-            $"Container/Margin/NotesButtons/2/EntranceCounter".visible = menu.is_item_checked(id)
+            $"Container/Margin/NotesButtons/2/EntranceCounter".visible = menu.is_item_checked(idx)
         MENU_SAVE_FILE:
             Events.emit_signal("save_file_clicked")
         MENU_LOAD_FILE:
@@ -157,7 +158,7 @@ func menu_pressed(id: int) -> void:
                 OS.window_size = Vector2(OS.window_size.x * (1500.0/1850.0), OS.window_size.y)
                 get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(1500, 950))
                 $"/root".get_viewport().set_size(Vector2(1500, 950))
-                menu.remove_item(MENU_MOVE_DOORS_NOTES)
+                menu.remove_item(menu.get_item_index(MENU_MOVE_DOORS_NOTES))
             #open notes
             else:
                 OS.window_size = Vector2(OS.window_size.x * (1850.0/1500.0), OS.window_size.y)
@@ -173,7 +174,7 @@ func menu_pressed(id: int) -> void:
                 $"/root".get_viewport().set_size(Vector2(1850, 950))
             if ($"/root/Tracker/NotesWindow".rect_position.x > 100):
                 Events.emit_signal("move_doors_notes")
-                if !menu.get_item_id(MENU_MOVE_DOORS_NOTES):
+                if menu.get_item_index(MENU_MOVE_DOORS_NOTES) == -1:
                     menu.add_item("Move doors notes to the other side", MENU_MOVE_DOORS_NOTES)
             OS.window_size = Vector2(OS.window_size.x * (350.0/$"/root".get_viewport().size.x), OS.window_size.y)
             get_tree().set_screen_stretch(get_tree().STRETCH_MODE_VIEWPORT, get_tree().STRETCH_ASPECT_KEEP, Vector2(350, 950))

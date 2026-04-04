@@ -104,11 +104,15 @@ func load_data(path: String) -> bool:
     save_file.close()
     return true
 
+func _map_to_local(map_pos: Vector2) -> Vector2:
+    return map_pos + $LightWorld.global_position - markers.global_position
+
 func _update_or_add_marker(data: Dictionary) -> void:
+    var local_pos = _map_to_local(Vector2(data.x, data.y))
     for i in markers.get_child_count():
         var marker = markers.get_child(i)
         if marker.uuid == data.uuid:
-            marker.position = Vector2(data.x, data.y)
+            marker.position = local_pos
             if data.count != null:
                 marker.set_count(data.count)
             return
@@ -126,7 +130,7 @@ func add_coop_marker(marker_data: Dictionary) -> void:
     marker.is_following = false
     marker.uuid = marker_data.uuid
     markers.add_child(marker)
-    marker.position = Vector2(marker_data.x, marker_data.y)
+    marker.position = _map_to_local(Vector2(marker_data.x, marker_data.y))
 
 func coop_remove_marker(uuid: String) -> void:
     for i in markers.get_child_count():

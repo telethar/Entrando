@@ -19,11 +19,14 @@ func _get_marker_data(marker: Node2D, delete: bool = false) -> Dictionary:
             "uuid": marker.uuid
             }
 
+    # Send coordinates relative to LightWorld so they are layout-independent
+    var lw = get_node("/root/Tracker/LightWorld")
+    var map_pos = marker.global_position - lw.global_position
     return {
         "event": "update_marker",
         "uuid": marker.uuid,
-        "x": marker.position.x,
-        "y": marker.position.y,
+        "x": map_pos.x,
+        "y": map_pos.y,
         "count": marker.count,
         "connector": marker.connector,
         "color": marker.modulate.to_html(false),

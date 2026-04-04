@@ -2,6 +2,7 @@ extends Node
 
 var _server = WebSocketServer.new()
 var _clients = {}
+var _marker_state = {}
 var _write_mode = WebSocketPeer.WRITE_MODE_BINARY
 var _use_multiplayer = true
 
@@ -44,12 +45,20 @@ func _on_stop_coop_server() -> void:
     Util.coop_server = false
     server_status.text = "Server Stopped"
     _clients.clear()
+    _marker_state.clear()
 
     
 func _connected(id, _proto):
     _clients[id] = true
     if (len(_clients) > 1):
         gui_status.text = "Server Running [" + str(len(_clients)-1) + " clients]"
+    # Send protocol handshake
+    var handshake = {"event": "handshake", "protocol_version": Util.COOP_PROTOCOL_VERSION}
+    _server.get_peer(id).put_packet(JSON.print(handshake).to_utf8())
+    # Send all buffered marker state to the newly connected client
+    for uuid in _marker_state:
+        var pkt_data = _marker_state[uuid]
+        _server.get_peer(id).put_packet(JSON.print(pkt_data).to_utf8())
 
 func _close_request(id, _code, _reason):
     _clients.erase(id)
@@ -59,6 +68,21 @@ func _disconnected(id, _was_clean = false):
 
 func _on_data(id):
     var pkt = _server.get_peer(id).get_packet()
+    # Track marker state for reconnecting clients
+    var pkt_str = pkt.get_string_from_utf8()
+    var parsed = parse_json(pkt_str)
+    if typeof(parsed) == TYPE_DICTIONARY:
+        # Handle client handshake (version check)
+        if parsed.get("event") == "handshake":
+            var client_ver = parsed.get("protocol_version", -1)
+            if client_ver != Util.COOP_PROTOCOL_VERSION:
+                _server.disconnect_peer(id, 4000, "Coop protocol mismatch: server v%d, client v%d. Ensure server and clients are using the same version of Entrando." % [Util.COOP_PROTOCOL_VERSION, client_ver])
+            return
+        if "uuid" in parsed:
+            if parsed.get("event") == "remove_marker":
+                _marker_state.erase(parsed.uuid)
+            elif parsed.get("event") == "update_marker":
+                _marker_state[parsed.uuid] = parsed
     # Broadcast the packet to all clients except the one that sent it.
     for client_id in _clients.keys():
         if client_id != id:

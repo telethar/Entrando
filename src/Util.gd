@@ -6,6 +6,7 @@ const GROUP_MARKER = "markers"
 const GROUP_ITEMS = "items"
 const GROUP_ENTRANCES = "entrances"
 const GROUP_NOTES = "notes_buttons"
+const COOP_PROTOCOL_VERSION = 1
 
 var mode: int = MODE_OW
 # only shows entrances, and not OW items
