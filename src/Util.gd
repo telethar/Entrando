@@ -6,7 +6,7 @@ const GROUP_MARKER = "markers"
 const GROUP_ITEMS = "items"
 const GROUP_ENTRANCES = "entrances"
 const GROUP_NOTES = "notes_buttons"
-const COOP_PROTOCOL_VERSION = 1
+const COOP_PROTOCOL_VERSION = 2
 
 var mode: int = MODE_OW
 # only shows entrances, and not OW items
@@ -69,26 +69,23 @@ func get_external_ip_address() -> String:
         "Accept: */*"
     ]
     err = http.connect_to_host("http://api.ipify.org")
-    assert(err == OK) 
+    if err != OK:
+        return "127.0.0.1"
     while http.get_status() == HTTPClient.STATUS_CONNECTING or http.get_status() == HTTPClient.STATUS_RESOLVING:
         http.poll()
-        if not OS.has_feature("web"):
-            OS.delay_msec(500)
-        else:
-            yield(Engine.get_main_loop(), "idle_frame")
+        yield(Engine.get_main_loop(), "idle_frame")
 
-    assert(http.get_status() == HTTPClient.STATUS_CONNECTED)
+    if http.get_status() != HTTPClient.STATUS_CONNECTED:
+        return "127.0.0.1"
         
     err = http.request(HTTPClient.METHOD_GET, "/", headers)
 
     while http.get_status() == HTTPClient.STATUS_REQUESTING:
         http.poll()
-        if OS.has_feature("web"):
-            yield(Engine.get_main_loop(), "idle_frame")
-        else:
-            OS.delay_msec(500)
+        yield(Engine.get_main_loop(), "idle_frame")
     
-    assert(http.get_status() == HTTPClient.STATUS_BODY or http.get_status() == HTTPClient.STATUS_CONNECTED) 
+    if http.get_status() != HTTPClient.STATUS_BODY and http.get_status() != HTTPClient.STATUS_CONNECTED:
+        return "127.0.0.1"
     var ip_address = ""
     if http.has_response():
          ip_address = http.read_response_body_chunk().get_string_from_utf8()

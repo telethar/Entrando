@@ -122,6 +122,9 @@ func _on_data():
     if typeof(pkt) != TYPE_DICTIONARY:
         return
 
+    if pkt['event'] == "ping":
+        return
+
     if pkt['event'] == "handshake":
         var server_ver = pkt.get("protocol_version", -1)
         if server_ver != Util.COOP_PROTOCOL_VERSION:

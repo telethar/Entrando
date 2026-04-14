@@ -8,6 +8,8 @@ onready var markers: Node2D = $Markers
 
 func _ready() -> void:
     OS.low_processor_usage_mode = true
+    # Cap to ~10 FPS otherwise netowrking and autotracking hangs
+    OS.low_processor_usage_mode_sleep_usec = 100_000
     get_tree().set_auto_accept_quit(false)
     # Randomize for unique "UUIDs"
     randomize()

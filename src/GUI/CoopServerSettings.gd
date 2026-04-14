@@ -9,8 +9,10 @@ var upnp = null
 var upnp_port = null
 var server_status = null
 var hint_text = ""
+var _upnp_thread: Thread
 
 onready var shadow = $"/root/Tracker/GUILayer/GUI/CoopServerContainer/CoopServerSettings/Shadow"
+onready var status_text = $"/root/Tracker/GUILayer/GUI/CoopServerContainer/CoopServerSettings/Shadow/Container/BG/Control/StatusText"
 
 var server_address = ""
 
@@ -55,25 +57,42 @@ func _on_upnp_completed(_err):
     Events.emit_signal('start_coop_server', int(selected_port.get_line_edit().text))
 
 func _upnp_setup(server_port):
-    # UPNP queries take some time.
+    # UPNP queries take some time, run in a thread to avoid blocking.
+    start_button.disabled = true
+    status_text.text = "Discovering UPnP gateway..."
+    _upnp_thread = Thread.new()
+    _upnp_thread.start(self, "_upnp_thread_func", server_port)
+
+func _set_status(text: String) -> void:
+    status_text.text = text
+
+func _upnp_thread_func(server_port):
     upnp = UPNP.new()
     var err = upnp.discover()
-
     if err != OK:
-        push_error(str(err))
-        _on_upnp_completed(err)
+        call_deferred("_set_status", "UPnP discovery failed (error %d), starting without UPnP..." % err)
+        call_deferred("_upnp_thread_done", err, server_port)
         return
-
     if upnp.get_gateway() and upnp.get_gateway().is_valid_gateway():
+        call_deferred("_set_status", "UPnP gateway found, setting up port mapping...")
         upnp.add_port_mapping(server_port, server_port, ProjectSettings.get_setting("application/config/name"), "UDP")
         upnp.add_port_mapping(server_port, server_port, ProjectSettings.get_setting("application/config/name"), "TCP")
         upnp_port = server_port
-        _on_upnp_completed(OK)
+        call_deferred("_upnp_thread_done", OK, server_port)
     else:
-        _on_upnp_completed(ERR_CANT_CONNECT)
+        call_deferred("_set_status", "No valid UPnP gateway found, starting without UPnP...")
+        call_deferred("_upnp_thread_done", ERR_CANT_CONNECT, server_port)
 
+func _upnp_thread_done(err, _server_port):
+    if _upnp_thread:
+        _upnp_thread.wait_to_finish()
+        _upnp_thread = null
+    start_button.disabled = false
+    _on_upnp_completed(err)
 
 func _exit_tree():
+    if _upnp_thread:
+        _upnp_thread.wait_to_finish()
     if (upnp != null and upnp_port != null):
         upnp.delete_port_mapping(upnp_port, "UDP")
         upnp.delete_port_mapping(upnp_port, "TCP")

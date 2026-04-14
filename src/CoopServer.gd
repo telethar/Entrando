@@ -5,6 +5,8 @@ var _clients = {}
 var _marker_state = {}
 var _write_mode = WebSocketPeer.WRITE_MODE_BINARY
 var _use_multiplayer = true
+var _keepalive_timer: Timer
+const KEEPALIVE_INTERVAL = 30.0
 
 onready var server_status = $"/root/Tracker/GUILayer/GUI/CoopServerContainer/CoopServerSettings/Shadow/Container/BG/Control/StatusText"
 onready var gui_status = $"/root/Tracker/GUILayer/GUI/Container/Margin/HSplitContainer/Entrances/Dungeons/MarginContainer/VBoxContainer/HBoxContainer2/CoopStatus"
@@ -24,21 +26,34 @@ func _ready() -> void:
 
 func _on_start_coop_server(port: int) -> void:
     server_status.text = "Starting server..."
-    var ip_address = Util.get_external_ip_address()
     var err = _server.listen(port)
     if err != OK:
+        server_status.text = "Failed to start server"
         return
-    server_status.text = "Server started on " + ip_address + ":" + str(port)
     Events.emit_signal('connect_to_coop_server', "ws://127.0.0.1:" + str(port))
-    Events.emit_signal('coop_server_started', ip_address + ":" + str(port))
     gui_status.text = "Server Running"
     Util.coop_server = true
     gui_status_container.show()
     gui_label_container.show()
+    _keepalive_timer = Timer.new()
+    _keepalive_timer.wait_time = KEEPALIVE_INTERVAL
+    _keepalive_timer.connect("timeout", self, "_on_keepalive")
+    add_child(_keepalive_timer)
+    _keepalive_timer.start()
+    # Fetch external IP asynchronously
+    var ip_address = yield(Util.get_external_ip_address(), "completed")
+    if !is_instance_valid(self):
+        return
+    server_status.text = "Server started on " + ip_address + ":" + str(port)
+    Events.emit_signal('coop_server_started', ip_address + ":" + str(port))
 
 func _on_stop_coop_server() -> void:
     server_status.text = "Stopping server..."
     _server.stop()
+    if _keepalive_timer:
+        _keepalive_timer.stop()
+        _keepalive_timer.queue_free()
+        _keepalive_timer = null
     gui_status_container.hide()
     gui_label_container.hide()
     Events.emit_signal('coop_server_stopped')
@@ -46,6 +61,12 @@ func _on_stop_coop_server() -> void:
     server_status.text = "Server Stopped"
     _clients.clear()
     _marker_state.clear()
+
+func _on_keepalive() -> void:
+    var ping = {"event": "ping"}
+    var pkt = JSON.print(ping).to_utf8()
+    for client_id in _clients.keys():
+        _server.get_peer(client_id).put_packet(pkt)
 
     
 func _connected(id, _proto):
